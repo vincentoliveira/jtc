@@ -1,0 +1,3 @@
+jtc_default_testpage:
+    pattern:  /testme
+    defaults: { _controller: JtcDefaultBundle:Default:test }

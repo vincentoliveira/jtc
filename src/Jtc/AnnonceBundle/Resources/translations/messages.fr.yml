@@ -1,0 +1,30 @@
+## YAML Template.
+---
+
+jtc:
+  create:
+    title: "Ajouter votre annonce"
+    type_annonce: "Quelle type d'annonce voulez-vous créé ?"
+    voyageur_description: "Vous êtes un <strong>voyageur</strong> et vous recherchez un colis à transporter"
+    expediteur_description: "Vous êtes un <strong>expéditeur</strong> et vous possèdez un colis à transporter"
+    submit: "Créé une annonce"
+    
+    information_voyage: "Information sur le voyage"
+    date_depart: "Date de départ"
+    ville_depart: "Ville de départ"
+    ville_arrive: "Ville d'arrivé"
+    
+    information_colis: "Information sur le colis"
+    poids_disponible: "Poids disponible (en kilogramme)" 
+    poids_du_colis: "Poids du colis (en kilogramme)" 
+    prix_kilo: "Prix au kilo (en EUR)"
+    info_complementaires: "Information complémentaires"
+
+
+form:
+  error:
+    empty: "Le champ <em>%field%</em> doit être remplis"
+    bad_value: "La valeur du champ <em>%field%</em> n'est pas correct"
+    date_bad_format: "Le format de la date du champ <em>%field%</em> n'est pas correct"
+    date_past_value: "La date du champ <em>%field%</em> ne peut être dans le passé"
+    internal: "Une erreur s'est produite. Veuillez essayer ultérieurement."

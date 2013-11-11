@@ -1,0 +1,15 @@
+## YAML Template.
+---
+
+jtc:
+  title: "Zecolis"
+  copyright: "Copyright Zecolis - 2013"
+
+menu:
+  title: "Zecolis"
+  ajouter_annonce: "Ajouter une annonce"
+  chercher_annonce: "Chercher une annonce"
+  bonjour_utilisateur: "Bonjour <strong>%utilisateur%</strong>"
+  connexion: "Connexion"
+  inscription: "Inscription"
+  deconnexion: "Déconnexion"

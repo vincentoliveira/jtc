@@ -1,0 +1,35 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+    <section class="major">
+        <h2>Départs du jour</h2>
+    </section>
+    <ul class="dropotron">
+    {% for annonce in todayannonce %}
+        <li style="white-space: nowrap;">
+            {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}
+        </li>
+    {% else %}
+        <li style="white-space: nowrap;">Pas de départ aujourd'hui</li>
+    {% endfor %}
+    </ul>
+    <br/>
+    <br/>
+    
+    <section class="major">
+        <h2> Dernières annonces </h2>
+    </section>
+    <ul class="dropotron">
+    {% for annonce in lastannonce %}
+            <li style="white-space: nowrap;">
+                {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}
+           </li>        
+    {% else %}
+            <li style="white-space: nowrap;">Pas (encore !) d'annonces</li>
+    {% endfor %}
+        </ul>
+</div>
+
+{% endblock %}

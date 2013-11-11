@@ -1,0 +1,6 @@
+parameters:
+
+services:
+    jtc_annonce.annonce_form_handler:
+        class: Jtc\AnnonceBundle\Service\AnnonceFormHandler
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]

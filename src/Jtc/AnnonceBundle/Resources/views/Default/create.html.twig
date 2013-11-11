@@ -1,0 +1,121 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ 'jtc.create.title'|trans }}</h1>
+    <div class="col-md-12">
+        {% for field, fieldErrors in errors %}
+            {% for error in fieldErrors %}
+                <p class="error">{{ ('form.error.'~error)|trans({'%field%':field})|raw }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <form role="form" method="POST">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.type_annonce'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="radio col-md-12">
+                    <label>
+                        <input type="radio" class="radio-type" name="type" id="voyageur" value="voyageur" {% if old_data.type|default('') == 'voyageur' %}checked{% endif %}/>
+                        {{ 'jtc.create.voyageur_description'|trans|raw }}
+                    </label>
+                </div>
+                <div class="radio col-md-12">
+                    <label>
+                        <input type="radio" class="radio-type" name="type" id="expediteur" value="expediteur" {% if old_data.type|default('') == 'expediteur' %}checked{% endif %}/>
+                        {{ 'jtc.create.expediteur_description'|trans|raw }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_voyage'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    <label for="date_depart">{{ 'jtc.create.date_depart'|trans }}</label>
+                    <input type="date" class="form-control" id="date_depart" name="date_depart" value="{{ old_data.date_depart|default('') }}" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-6">
+                    <label for="ville_depart">{{ 'jtc.create.ville_depart'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_depart" name="ville_depart" value="{{ old_data.ville_depart|default('') }}" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ville_arrive">{{ 'jtc.create.ville_arrive'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_arrive" name="ville_arrive" value="{{ old_data.ville_arrive|default('') }}" />
+                </div>
+            </div>
+        </div>
+            
+        <div class="panel panel-default voyageur expediteur">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_colis'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    <label class="voyageur" for="poids">{{ 'jtc.create.poids_disponible'|trans }}</label>
+                    <label class="expediteur" for="poids">{{ 'jtc.create.poids_du_colis'|trans }}</label>
+                    <input type="number" class="form-control" id="poids" name="poids" value="{{ old_data.poids|default('') }}" />
+                </div>
+                <div class="form-group col-md-6 voyageur">
+                    <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
+                    <input type="number" class="form-control" id="prix" name="prix" value="{{ old_data.prix|default('') }}" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12">
+                    <label for="description">{{ 'jtc.create.info_complementaires'|trans }}</label>
+                    <textarea class="form-control" rows="2" name="description">{{ old_data.description|default('') }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.create.submit'|trans }}</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% spaceless %}
+<script>
+    $(document).ready(function(){
+        if ($('input[name=type]:checked').val() === 'voyageur'){
+            $('.expediteur').hide();
+            $('.voyageur').show();
+            $('#submit').attr("disabled", false);
+        }else if($('input[name=type]:checked').val() === 'expediteur'){
+            $('.voyageur').hide();
+            $('.expediteur').show();
+            $('#submit').attr("disabled", false);
+        }else{
+            $('.voyageur').hide();
+            $('.expediteur').hide();
+            $('#submit').attr("disabled", true);
+        }
+            
+        $('.radio-type').change(function(e){
+            e.preventDefault();
+            var value = $(this).val();
+            if (value === 'voyageur'){
+                $('.expediteur').hide();
+                $('.voyageur').show();
+                $('#submit').attr("disabled", false);
+            }else if(value === 'expediteur'){
+                $('.voyageur').hide();
+                $('.expediteur').show();
+                $('#submit').attr("disabled", false);
+            }else{
+                $('.voyageur').hide();
+                $('.expediteur').hide();
+                $('#submit').attr("disabled", true);
+            }
+        })
+    });
+</script>
+{% endspaceless %}
+{% endblock %}

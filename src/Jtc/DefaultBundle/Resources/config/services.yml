@@ -1,0 +1,7 @@
+parameters:
+#    jtc_default.example.class: Jtc\DefaultBundle\Example
+
+services:
+#    jtc_default.example:
+#        class: %jtc_default.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

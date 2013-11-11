@@ -1,0 +1,15 @@
+parameters:
+#    jtc_user.example.class: Jtc\UserBundle\Example
+
+services:
+    jtc_user.registration.form.type:
+        class: Jtc\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: jtc_user_registration }
+            
+    jtc_user.profile.form.type:
+        class: Jtc\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: jtc_user_profile }

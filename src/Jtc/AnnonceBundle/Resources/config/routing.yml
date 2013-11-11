@@ -1,0 +1,7 @@
+jtc_annonce_homepage:
+    pattern:  /
+    defaults: { _controller: JtcAnnonceBundle:Default:index }
+    
+jtc_annonce_create:
+    pattern:  /ajouter
+    defaults: { _controller: JtcAnnonceBundle:Default:create }

@@ -1,0 +1,40 @@
+{% set route = app.request.attributes.get('_route')|default('') %}
+{% if route is not empty %}
+   {% set currentPath = path(route, app.request.attributes.get('_route_params')) %}
+{% else %}
+    {% set currentPath = '' %}
+{% endif %}
+
+<header class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('jtc_annonce_homepage') }}">{{ 'menu.title'|trans }}</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li {% if currentPath == path('jtc_annonce_create') %}class="active"{% endif %}">
+                    <a href="{{ path('jtc_annonce_create') }}">{{ 'menu.ajouter_annonce'|trans }}</a>
+                </li>
+                <li class="">
+                    <a href="#">{{ 'menu.chercher_annonce'|trans }}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'menu.bonjour_utilisateur'|trans({'%utilisateur%': app.user.username})|raw }}</a></li>
+                    <li class="link-logout"><a href="{{ path('fos_user_security_logout') }}">{{ 'menu.deconnexion'|trans({}) }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'menu.connexion'|trans }}</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}">{{ 'menu.inscription'|trans }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</header>
