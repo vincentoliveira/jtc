@@ -12,6 +12,19 @@ parameters:
         en_cours: 0
         supprime: 1
         supprime_admin: 2
+    
+    route_tree:
+        jtc_annonce_homepage:
+            jtc_annonce_create: ~
+        fos_user_security_login: ~
+        fos_user_registration_register:
+            fos_user_registration_confirmed: ~
+        fos_user_profile_show:
+            fos_user_profile_edit: ~
+        fos_user_resetting_request:
+            fos_user_resetting_send_email: ~
+            fos_user_resetting_check_email: ~
+            fos_user_resetting_reset: ~
 
 framework:
     #esi:             ~

@@ -19,20 +19,26 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                <li {% if currentPath == path('jtc_annonce_create') %}class="active"{% endif %}">
+                <li {% if 'jtc_annonce_create' in breadcrumb %}class="active"{% endif %}>
                     <a href="{{ path('jtc_annonce_create') }}">{{ 'menu.ajouter_annonce'|trans }}</a>
                 </li>
-                <li class="">
+                <li>
                     <a href="#">{{ 'menu.chercher_annonce'|trans }}</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('fos_user_profile_edit') }}">{{ 'menu.bonjour_utilisateur'|trans({'%utilisateur%': app.user.username})|raw }}</a></li>
+                    <li {% if 'fos_user_profile_edit' in breadcrumb %}class="active"{% endif %}>
+                        <a href="{{ path('fos_user_profile_edit') }}">{{ 'menu.bonjour_utilisateur'|trans({'%utilisateur%': app.user.username})|raw }}</a>
+                    </li>
                     <li class="link-logout"><a href="{{ path('fos_user_security_logout') }}">{{ 'menu.deconnexion'|trans({}) }}</a></li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'menu.connexion'|trans }}</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">{{ 'menu.inscription'|trans }}</a></li>
+                    <li {% if 'fos_user_security_login' in breadcrumb %}class="active"{% endif %}>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'menu.connexion'|trans }}</a>
+                    </li>
+                    <li {% if 'fos_user_registration_register' in breadcrumb %}class="active"{% endif %}>
+                        <a href="{{ path('fos_user_registration_register') }}">{{ 'menu.inscription'|trans }}</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
