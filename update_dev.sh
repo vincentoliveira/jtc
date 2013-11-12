@@ -22,9 +22,6 @@ sudo -u www-data php app/console fos:user:create test test@zecolis.com test
 sudo -u www-data php app/console fos:user:create admin admin@zecolis.com admin --super-admin
 
 sudo -u www-data php app/console cache:clear --no-warmup
-sudo -u www-data php app/console cache:clear --env=test --no-warmup
-sudo -u www-data php app/console cache:clear --env=prod --no-warmup
-php app/console cache:warmup --env=prod --no-debug
 chmod -R 0777 app/cache
 chmod -R 0777 app/logs
 chown -R www-data:www-data *
