@@ -20,7 +20,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 {% for route in breadcrumb %}
-                <li {% if loop.last %}class="active"{% endif %}><a href="{{ path(route) }}">{{ ('route.'~route)|trans }}</a></li>
+                <li {% if loop.last %}class="active"{% endif %}><a href="{{ path(route, app.request.attributes.get('_route_params')) }}">{{ ('route.'~route)|trans }}</a></li>
                 {% endfor %}
             </ol>
         </div>
