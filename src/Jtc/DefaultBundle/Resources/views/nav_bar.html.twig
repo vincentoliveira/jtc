@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li {% if 'fos_user_profile_edit' in breadcrumb %}class="active"{% endif %}>
-                        <a href="{{ path('fos_user_profile_edit') }}">{{ 'menu.bonjour_utilisateur'|trans({'%utilisateur%': app.user.username})|raw }}</a>
+                        <a href="{{ path('fos_user_profile_show') }}">{{ 'menu.bonjour_utilisateur'|trans({'%utilisateur%': app.user.username})|raw }}</a>
                     </li>
                     <li class="link-logout"><a href="{{ path('fos_user_security_logout') }}">{{ 'menu.deconnexion'|trans({}) }}</a></li>
                 {% else %}

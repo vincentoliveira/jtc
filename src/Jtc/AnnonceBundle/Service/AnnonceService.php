@@ -7,9 +7,9 @@ use Symfony\Component\DependencyInjection\Container;
 use Jtc\AnnonceBundle\Entity\Annonce;
 
 /**
- * AnnonceFormHandler: Handle Annonce form
+ * AnnonceService
  */
-class AnnonceFormHandler
+class AnnonceService
 {
     protected $em;
     protected $container;

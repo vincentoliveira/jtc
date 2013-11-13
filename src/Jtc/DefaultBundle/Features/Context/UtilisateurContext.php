@@ -48,8 +48,8 @@ class UtilisateurContext extends AbstractContext
     }
 
     /**
-     * @Given /^l\'email "([^"]*)" existe avec le mot de passe "([^"]*)"$/
-     */
+     * @Given /^l\'email "([^"]*)" existe avec le mot de passe "([^"]*)"$/ 
+    */
     public function lEmailExisteAvecLeMotDePasse($email, $password)
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getManager();
@@ -71,16 +71,15 @@ class UtilisateurContext extends AbstractContext
 
     
     /**
-     * @Given /^I am logged as "([^"]*)" password "([^"]*)"$/
+     * @Given /^je suis connecté en tant que "([^"]*)" et mot de passe "([^"]*)"$/
      */
-    public function iAmLoggedAsPassword($user, $pwd)
+    public function jeSuisConnecteEnTantQueEtMotDePasse($username, $password)
     {
-        /*
-         * And I fill in "_username" with "test"
-         */
-        $steps[] = new Step\Given('I am on "/login"');
-        $steps[] = new Step\Given('I fill in "_username" with "'.$user.'"');
-        $steps[] = new Step\Given('I fill in "_password" with "'.$pwd.'"');
-        $steps[] = new Step\Given('I press "_submit"');
+        $steps[] = new Step\Given('je suis sur "/login"');
+        $steps[] = new Step\Given('je remplis "_username" avec "'.$username.'"');
+        $steps[] = new Step\Given('je remplis "_password" avec "'.$password.'"');
+        $steps[] = new Step\Given('je presse "_submit"');
+        
+        return $steps;
     }
 }

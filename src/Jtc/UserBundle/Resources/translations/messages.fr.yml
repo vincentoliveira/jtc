@@ -67,9 +67,10 @@ registration:
 # Profile
 profile:
     show:
-        username: Nom d'utilisateur
-        email: Adresse e-mail
-        telephone: Téléphone
+        username: "Nom d'utilisateur :"
+        email: "Adresse e-mail :"
+        telephone: "Téléphone :"
+        edit: "Editer mon profil"
     edit:
         submit: Mettre à jour
     flash:

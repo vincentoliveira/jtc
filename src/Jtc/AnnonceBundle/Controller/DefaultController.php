@@ -40,7 +40,7 @@ class DefaultController extends BaseController
         $request = $this->getRequest();
         $postData = $request->request->all();
         if ($request->getMethod() == "POST") {
-            $formHandler = $this->get('jtc_annonce.annonce_form_handler');
+            $formHandler = $this->get('jtc_annonce.annonce_service');
 
             $isValid = $formHandler->isValid($postData);
             if ($isValid === true) {
@@ -78,11 +78,20 @@ class DefaultController extends BaseController
      */
     public function completeAction(Annonce $annonce)
     {
+        $annonceUtilisateur = $annonce->getUtilisateur();
+        $lastUpdate = $annonce->getDateMaj();
+        $timeToRegisterBeforeAnnonce = $this->container->getParameter('time_to_register_before_annonce');
+        $now = new \DateTime();
+        
+        if ($annonceUtilisateur !== null || ($now->getTimestamp() - $lastUpdate->getTimestamp()) > $timeToRegisterBeforeAnnonce) {
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+        
         $statuts = $this->container->getParameter('annonce.status');
         $statutId = $statuts['default'];
         $utilisateur = $this->getUser();
         
-        $formHandler = $this->get('jtc_annonce.annonce_form_handler');
+        $formHandler = $this->get('jtc_annonce.annonce_service');
         $formHandler->completeAnnonce($annonce->getId(), $utilisateur->getId(), $statutId); 
        
         return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));

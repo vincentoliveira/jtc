@@ -5,4 +5,4 @@ sudo -u www-data php app/console doctrine:database:create --env=test
 sudo -u www-data php app/console doctrine:schema:update --force --env=test
 
 #phpunit -c app/ --debug
-bin/behat @JtcDefaultBundle
+bin/behat @JtcDefaultBundle "$@"

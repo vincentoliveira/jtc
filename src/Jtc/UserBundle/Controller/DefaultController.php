@@ -27,15 +27,6 @@ class DefaultController extends BaseController
      */
     public function authentificateBeforeAnnonceAction(Annonce $annonce, Request $request)
     {
-        $utilisateur = $annonce->getUtilisateur();
-        $lastUpdate = $annonce->getDateMaj();
-        $timeToRegisterBeforeAnnonce = $this->container->getParameter('time_to_register_before_annonce');
-        $now = new \DateTime();
-        
-        if ($utilisateur !== null || $now->getTimestamp() - $lastUpdate->getTimestamp() > $timeToRegisterBeforeAnnonce) {
-            throw new NotFoundHttpException();
-        }
-        
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
