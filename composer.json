@@ -21,7 +21,12 @@
         "incenteev/composer-parameter-handler": "~2.0",
         
         "jms/security-extra-bundle": "1.5.*@dev",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        
+        "behat/symfony2-extension": "*@stable",
+        "behat/mink-extension": "*@stable",
+        "behat/mink-browserkit-driver": "*@stable",
+        "behat/mink-zombie-driver": "*@stable"
     },
     "scripts": {
         "post-install-cmd": [

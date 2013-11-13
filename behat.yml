@@ -1,0 +1,13 @@
+default:
+  formatter:
+    name: pretty
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+      kernel:
+        env: test
+        debug: true
+    Behat\MinkExtension\Extension:
+      base_url: '/'
+      default_session: symfony2
+      show_cmd: sh firefox.sh %s &
