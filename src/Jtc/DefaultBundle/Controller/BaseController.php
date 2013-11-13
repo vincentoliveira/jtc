@@ -22,6 +22,21 @@ class BaseController extends Controller
     }
     
     /**
+     * Recupère l'utilisateur courant
+     * @return \Jtc\DefaultBundle\Controller\User|null
+     */
+    public function getUser()
+    {
+        $token = $this->container->get('security.context')->getToken();
+        $utilisateur = $token !== null ? $token->getUser() : null;
+        if ($utilisateur instanceof \Jtc\UserBundle\Entity\User) {
+            return $utilisateur;
+        }
+        
+        return null;
+    }
+    
+    /**
      * Get entity repository
      * @param string $persistentObjectName
      * @return Entityrepository

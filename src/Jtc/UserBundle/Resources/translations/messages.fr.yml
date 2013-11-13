@@ -4,6 +4,11 @@
 # Security
 "Bad credentials": "Nom d'utilisateur ou mot de passe incorrect"
 
+# Default
+user:
+    connexion: "Connexion"
+    inscription: "Inscription"
+
 # Security
 security:
     login:

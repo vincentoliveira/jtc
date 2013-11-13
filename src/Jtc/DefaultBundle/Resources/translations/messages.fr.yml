@@ -9,14 +9,18 @@ menu:
   title: "Zecolis"
   ajouter_annonce: "Ajouter une annonce"
   chercher_annonce: "Chercher une annonce"
+  mes_annonce: "Mes annonces"
   bonjour_utilisateur: "Bonjour <strong>%utilisateur%</strong>"
   connexion: "Connexion"
   inscription: "Inscription"
   deconnexion: "Déconnexion"
 
+# Fil d'arianne
 route:
     jtc_annonce_homepage: "Accueil"
     jtc_annonce_create: "Créer une annonce"
+    jtc_user_register_before_annonce: "Inscription ou connexion"
+    jtc_annonce_show: "Annonce"
     fos_user_security_login: "Connexion"
     fos_user_registration_register: "Inscription"
     fos_user_registration_confirmed: "Confirmation"

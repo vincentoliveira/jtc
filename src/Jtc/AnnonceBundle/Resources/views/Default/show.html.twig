@@ -1,0 +1,23 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ 'jtc.annonce.title'|trans }}</h1>
+    <blockquote>{{ 'jtc.annonce.creer_par_mis_a_jour_le'|trans({'%utilisateur%':annonce.utilisateur, '%date_maj%':annonce.dateMaj|date('d/m/y')})|raw }}</blockquote>
+
+    <p>{{ 'jtc.annonce.depart_le'|trans }} <strong>{{ annonce.dateDepart|date('d/m/y') }}</strong></p>
+    <p>
+        {{ 'jtc.annonce.voyage'|trans }}
+        <strong>{{ annonce.villeDepart }}</strong>
+        <span class="glyphicon glyphicon-arrow-right">&nbsp;</span>
+        <strong>{{ annonce.villeArrive }}</strong>
+    </p>
+
+    <p>{{ 'jtc.annonce.poids'|trans }} <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
+    <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+    <p>{{ 'jtc.annonce.description'|trans }}</p>
+    <pre>{{ annonce.description }}</pre>
+</div>
+
+{% endblock %}

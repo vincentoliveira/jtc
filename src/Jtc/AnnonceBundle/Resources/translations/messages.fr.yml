@@ -19,7 +19,20 @@ jtc:
     poids_du_colis: "Poids du colis (en kilogramme)" 
     prix_kilo: "Prix au kilo (en EUR)"
     info_complementaires: "Information complémentaires"
-
+    
+  annonce:
+    title: "Annonce"
+    creer_par_mis_a_jour_le: "Créée par <strong>%utilisateur%</strong>, mis à jour le %date_maj%"
+    depart_le: "Départ prévu le :"
+    voyage: "Voyage :"
+    information_voyage: "Information sur le voyage"
+    information_colis: "Information sur le colis"
+    info_complementaires: "Information complémentaires"
+    poids: "Poids disponible :"
+    prix: "Prix :"
+    unite_poids: "(kg)"
+    unite_prix: "(EUR / kg)"
+    description: "Description :"
 
 form:
   error:

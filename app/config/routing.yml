@@ -6,6 +6,10 @@ jtc_annonce:
     resource: "@JtcAnnonceBundle/Resources/config/routing.yml"
     prefix:   /
     
+jtc_user:
+    resource: "@JtcUserBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 # FosUser routing
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

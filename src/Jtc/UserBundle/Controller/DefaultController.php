@@ -9,11 +9,33 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Jtc\AnnonceBundle\Entity\Annonce;
 
-class RegistrationController extends BaseController
+class DefaultController extends BaseController
 {
-    public function registerAction(Request $request)
+    /**
+     * Authentification avant de poster une annonce
+     * 
+     * @param \Jtc\AnnonceBundle\Entity\Annonce $annonce
+     * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
+     * @Template()
+     * @Secure(roles="IS_AUTHENTICATED_ANONYMOUSLY")
+     */
+    public function authentificateBeforeAnnonceAction(Annonce $annonce, Request $request)
     {
+        $utilisateur = $annonce->getUtilisateur();
+        $lastUpdate = $annonce->getDateMaj();
+        $timeToRegisterBeforeAnnonce = $this->container->getParameter('time_to_register_before_annonce');
+        $now = new \DateTime();
+        
+        if ($utilisateur !== null || $now->getTimestamp() - $lastUpdate->getTimestamp() > $timeToRegisterBeforeAnnonce) {
+            throw new NotFoundHttpException();
+        }
+        
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -39,7 +61,7 @@ class RegistrationController extends BaseController
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
+                    $url = $this->container->get('router')->generate('jtc_annonce_complete', array('id' => $annonce->getId()));
                     $response = new RedirectResponse($url);
                 }
 
@@ -49,8 +71,9 @@ class RegistrationController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('JtcUserBundle:Registration:register.html.' . $this->getEngine(), array(
-                    'form' => $form->createView(),
-        ));
+        return array(
+            'form' => $form->createView(),
+            'id' => $annonce->getId(),
+        );
     }
 }

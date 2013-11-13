@@ -5,3 +5,11 @@ jtc_annonce_homepage:
 jtc_annonce_create:
     pattern:  /ajouter
     defaults: { _controller: JtcAnnonceBundle:Default:create }
+    
+jtc_annonce_complete:
+    pattern:  /complete/{id}
+    defaults: { _controller: JtcAnnonceBundle:Default:complete }
+
+jtc_annonce_show:
+    pattern:  /annonce/{id}
+    defaults: { _controller: JtcAnnonceBundle:Default:show }

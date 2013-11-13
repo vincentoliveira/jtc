@@ -17,7 +17,7 @@ class ProfileFormType extends BaseType
      
     public function getName()
     {
-        return 'jtc_user_profile';
+        return 'jtc_profile';
     }
      
 }

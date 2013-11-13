@@ -61,25 +61,28 @@ class AnnonceFormHandler
     /**
      * Add content from form
      * @param array $rowContent
+     * @param int $utilisateurId;
      * @return int New content id
      */
-    public function hydrateEntity(Array $params)
+    public function hydrateEntity(Array $params, $utilisateurId)
     {
         try {
             $annonce = new Annonce();
             
+            $statuts = $this->container->getParameter('annonce.status');
+            $statut = $statuts['brouillon'];
+            
             // utilisateur
-            $token = $this->container->get('security.context')->getToken();
-            $utilisateur = $token !== null ? $token->getUser() : null;
-            if (!$utilisateur instanceof \Jtc\UserBundle\Entity\User) {
-                return false;
+            if ($utilisateurId !== null) {
+                $utilisateur = $this->em->getRepository('JtcUserBundle:User')->find($utilisateurId);
+                if ($utilisateur !== null) {
+                    $annonce->setUtilisateur($utilisateur);
+                    $statut = $statuts['default'];
+                }
             }
-            $annonce->setUtilisateur($utilisateur);
             
             // statut
-            $statuts = $this->container->getParameter('annonce.status');
-            $defaultStatut = $statuts['default'];
-            $annonce->setStatut($defaultStatut);
+            $annonce->setStatut($statut);
             
             // date
             $dateDepart = new \DateTime($this->getPostParams($params, 'date_depart'));
@@ -104,13 +107,53 @@ class AnnonceFormHandler
             $this->em->flush();
             
             return $annonce->getId();
-        }
-        catch (\Exception $e) {
-            throw $e;
+        } catch (\Exception $e) {
+            if ($this->container->getParameter("kernel.environment") == 'dev') {
+                throw $e;
+            }
             return false;            
         }
     }
     
+    /**
+     * Complete une annonce:
+     *  - assigne un utilisateur
+     *  - modifie le statut
+     * @param int $annonceId
+     * @param int $utilisateurId
+     * @param int $statutId
+     * @return boolean success
+     */
+    public function completeAnnonce($annonceId, $utilisateurId, $statutId)
+    {
+        try {
+            // get annonce
+            $annonce = $this->em->getRepository('JtcAnnonceBundle:Annonce')->find($annonceId);
+            if ($annonce === null) {
+                return false;
+            }
+
+            // utilisateur
+            if ($utilisateurId !== null) {
+                $utilisateur = $this->em->getRepository('JtcUserBundle:User')->find($utilisateurId);
+                if ($utilisateur !== null) {
+                    $annonce->setUtilisateur($utilisateur);
+                }
+            }
+
+            $annonce->setStatut($statutId);
+
+            $this->em->persist($annonce);
+            $this->em->flush();
+
+            return $annonce->getId();
+        } catch (\Exception $e) {
+            if ($this->container->get('http_kernel')->getEnvironment() == 'dev') {
+                throw $e;
+            }
+            return false;            
+        }
+    }
     
     /**
      * Get POST parameter or default value

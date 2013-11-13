@@ -8,14 +8,19 @@ parameters:
         expediteur: 1
         
     annonce.status:
-        default: 0
-        en_cours: 0
-        supprime: 1
-        supprime_admin: 2
+        default: 1
+        brouillon: 0
+        visible: 1
+        supprime: 2
+        supprime_admin: 3
+
+    time_to_register_before_annonce: 600
     
     route_tree:
         jtc_annonce_homepage:
-            jtc_annonce_create: ~
+            jtc_annonce_create:
+                jtc_user_register_before_annonce: ~
+            jtc_annonce_show: ~
         fos_user_security_login: ~
         fos_user_registration_register:
             fos_user_registration_confirmed: ~
@@ -99,8 +104,8 @@ fos_user:
     user_class: Jtc\UserBundle\Entity\User
     registration:
         form:
-            type: jtc_user_registration
+            type: jtc_registration
     profile:
         form:
-            type: jtc_user_profile
+            type: jtc_profile
 

@@ -1,4 +1,4 @@
-    <a href="#">
+    <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
             <span class="big">{{ annonce.dateDepart|date('d/m/Y') }} </span>
             - Départ : <span class="fontblue"> {{ annonce.villeDepart }} </span>
             / Arrivé : <span class="fontdarkpink"> {{ annonce.villeArrive }} </span>

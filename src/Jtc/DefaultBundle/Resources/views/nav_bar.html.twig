@@ -18,6 +18,11 @@
                 <li>
                     <a href="#">{{ 'menu.chercher_annonce'|trans }}</a>
                 </li>
+                {% if is_granted("ROLE_USER") %}
+                <li>
+                    <a href="#">{{ 'menu.mes_annonce'|trans }}</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
