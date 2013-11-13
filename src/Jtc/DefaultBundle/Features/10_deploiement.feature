@@ -1,6 +1,6 @@
 # language: fr
-@vabf
-Fonctionnalité: Test de bon fonctionnement de l'application
+@deploiement
+Fonctionnalité: Test de réussite du déploiement
 
 Scénario: 10.1 - Test page
           Soit je suis sur "/testme"
