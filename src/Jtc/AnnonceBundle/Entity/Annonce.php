@@ -46,7 +46,7 @@ class Annonce
      /**
      * @var string
      *
-     * @ORM\Column(name="type", type="integer", length=2)
+     * @ORM\Column(name="type", type="string", length=2)
      */
     private $type;
     

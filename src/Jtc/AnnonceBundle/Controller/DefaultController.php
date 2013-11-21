@@ -45,7 +45,6 @@ class DefaultController extends BaseController
             $isValid = $formHandler->isValid($postData);
             if ($isValid === true) {
                 $utilisateur = $this->getUser();
-                
                 $annonceId = $formHandler->hydrateEntity($postData, $utilisateur);
                 if ($annonceId === false) {
                     $errors['internal'][] = 'internal';
@@ -119,6 +118,32 @@ class DefaultController extends BaseController
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $user = $this->getUser();
         $annonces = $repo->getAnnoncesFromUser($user);
+        
+        return array('annonces' => $annonces);
+    }
+    
+    /**
+     * Liste des annonces 'voyageurs'
+     * 
+     * @Template()
+     */
+    public function voyageursAction()
+    {
+        $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
+        $annonces = $repo->findByType('voyageur');
+        
+        return array('annonces' => $annonces);
+    }
+    
+    /**
+     * Liste des annonces 'expediteur'
+     * 
+     * @Template()
+     */
+    public function expediteursAction()
+    {
+        $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
+        $annonces = $repo->findByType('expediteur');
         
         return array('annonces' => $annonces);
     }

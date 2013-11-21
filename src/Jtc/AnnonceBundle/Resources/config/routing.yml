@@ -17,3 +17,11 @@ jtc_annonce_show:
 jtc_annonce_mes_annonces:
     pattern:  /mesannonces
     defaults: { _controller: JtcAnnonceBundle:Default:mesAnnonces }
+
+jtc_annonce_voyageurs:
+    pattern:  /voyageurs
+    defaults: { _controller: JtcAnnonceBundle:Default:voyageurs }
+    
+jtc_annonce_expediteurs:
+    pattern:  /expediteurs
+    defaults: { _controller: JtcAnnonceBundle:Default:expediteurs }

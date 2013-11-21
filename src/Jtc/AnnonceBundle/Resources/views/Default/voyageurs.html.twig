@@ -1,0 +1,16 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ 'jtc.voyageurs.title'|trans }}</h1>
+    <ul class="dropotron">
+    {% for annonce in annonces %}
+            <li style="white-space: nowrap;">{% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}</li>
+    {% else %}
+            <li style="white-space: nowrap;">{{ 'jtc.mes_annonce.aucune_annonce'|trans }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
