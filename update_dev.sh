@@ -15,11 +15,9 @@ sudo -u www-data php app/console doctrine:database:drop --force
 sudo -u www-data php app/console doctrine:database:create
 sudo -u www-data php app/console doctrine:schema:update --force
 
-sudo -u www-data php app/console assets:install web --symlink
+sudo -u www-data php app/console doctrine:fixtures:load --append
 
-# Add users
-sudo -u www-data php app/console fos:user:create test test@zecolis.com test
-sudo -u www-data php app/console fos:user:create admin admin@zecolis.com admin --super-admin
+sudo -u www-data php app/console assets:install web --symlink
 
 sudo -u www-data php app/console cache:clear --no-warmup
 chmod -R 0777 app/cache
