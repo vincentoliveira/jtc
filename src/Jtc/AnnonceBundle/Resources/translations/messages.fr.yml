@@ -33,6 +33,10 @@ jtc:
     unite_poids: "(kg)"
     unite_prix: "(EUR / kg)"
     description: "Description :"
+    
+  mes_annonce:
+    title: "Mes annonces"
+    aucune_annonce: "Vous n'avez pas encore créer d'annonces"
 
 form:
   error:

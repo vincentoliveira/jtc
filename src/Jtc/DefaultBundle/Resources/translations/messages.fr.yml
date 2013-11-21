@@ -21,6 +21,7 @@ route:
     jtc_annonce_create: "Créer une annonce"
     jtc_user_register_before_annonce: "Inscription ou connexion"
     jtc_annonce_show: "Annonce"
+    jtc_annonce_mes_annonces: "Mes annonces"
     fos_user_security_login: "Connexion"
     fos_user_registration_register: "Inscription"
     fos_user_registration_confirmed: "Confirmation"

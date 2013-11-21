@@ -109,5 +109,17 @@ class DefaultController extends BaseController
         return array('annonce' => $annonce);
     }
 
-
+    /**
+     * Mes annonces
+     * 
+     * @Template()
+     */
+    public function mesAnnoncesAction()
+    {
+        $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
+        $user = $this->getUser();
+        $annonces = $repo->getAnnoncesFromUser($user);
+        
+        return array('annonces' => $annonces);
+    }
 }

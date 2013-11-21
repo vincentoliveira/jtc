@@ -21,6 +21,7 @@ parameters:
             jtc_annonce_create:
                 jtc_user_register_before_annonce: ~
             jtc_annonce_show: ~
+        jtc_annonce_mes_annonces: ~
         fos_user_security_login: ~
         fos_user_registration_register:
             fos_user_registration_confirmed: ~

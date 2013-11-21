@@ -42,4 +42,20 @@ class AnnonceRepository extends EntityRepository
         
         return $qb->getQuery()->getResult();
     }
+    
+    /**
+     * 
+     * @param type $user
+     * @return type
+     */
+    public function getAnnoncesFromUser($user)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+                ->where('a.utilisateur = :user')
+                ->setParameter(':user', $user)
+                ->orderBy('a.dateMaj', 'DESC');
+        
+        return $qb->getQuery()->getResult();
+    }
 }
