@@ -29,3 +29,7 @@ jtc_annonce_expediteurs:
 jtc_annonce_search:
     pattern:  /recherche
     defaults: { _controller: JtcAnnonceBundle:Default:search }
+
+jtc_annonce_contact:
+    pattern:  /contact/{id}
+    defaults: { _controller: JtcAnnonceBundle:Default:contact }

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Jtc\AnnonceBundle\Entity\Annonce;
+use Jtc\AnnonceBundle\Form\AnnonceContactType;
 
 class DefaultController extends BaseController
 {
@@ -175,6 +176,53 @@ class DefaultController extends BaseController
         }
         $annonces = $aRepository->getLastAnnonce($type);
         return $this->render($pageToGoBackTo, array('annonces' => $annonces
+                ));
+    }
+    
+    public function contactAction($id) 
+    {
+        $em = $this->getDoctrine()->getManager();
+        $aRepository = $em->getRepository('JtcAnnonceBundle:Annonce');
+
+        $annonce = $aRepository->find($id);
+
+
+        $form = $this->createForm(new AnnonceContactType);
+        $request = $this->container->get('request');
+
+        if ($request->getMethod() == 'POST') {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $mailer = $this->container->get('mailer');
+                $message = \Swift_Message::newInstance();
+                $data = $form->getData();
+                $mailContent = $this->render(
+                        'JtcAnnonceBundle:Default:email.html.twig', array('contenu' => $data['contenu'],
+                    'titre' => $data['sujet'], 'email' => $data['email'])
+                );
+                $formHandler = $this->get('jtc_annonce.annonce_service');
+                $uRepository = $em->getRepository('JtcUserBundle:User');
+                $email = $uRepository->find($annonce->getUtilisateur())->getEmail();
+                $sujet = $formHandler->truncate($annonce->getDescription(), 20, '...', true);
+                $message->setSubject("Nouveau message sur votre annonce : " . $sujet)
+                        ->setFrom($data['email'])
+                        ->setTo($email)
+                        ->setContentType('text/html')
+                        ->setBody($mailContent);
+
+                $mailer->send($message);
+
+                // On redirige vers la page de visualisation de l'article nouvellement créé
+                $this->get('session')->getFlashBag()->add('info', 'Message bien envoyé');
+                return $this->render('JtcAnnonceBundle:Default:show.html.twig', array(
+                            'annonce' => $annonce
+                        ));
+            }
+        }
+        // On passe la méthode createView() du formulaire à la vue afin qu'elle puisse afficher le formulaire toute seule
+        return $this->render('JtcAnnonceBundle:Default:contact.html.twig', array(
+                    'form' => $form->createView(),
+                    'annonce' => $annonce
                 ));
     }
 }

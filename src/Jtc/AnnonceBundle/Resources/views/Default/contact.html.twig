@@ -1,0 +1,24 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="container">
+        <section class="box">
+            <blockquote>Pour l'annonce : {{ 'jtc.annonce.creer_par_mis_a_jour_le'|trans({'%utilisateur%':annonce.utilisateur, '%date_maj%':annonce.dateMaj|date('d/m/y')})|raw }}</blockquote>
+        </section>
+        <section>
+            <form action="{{ path('jtc_annonce_contact',  {id:annonce.id}) }}" 
+                  method="post" {{ form_enctype(form) }} >
+                            {{ form_errors(form) }}
+                            {{ form_row(form.nom) }}
+                            {{ form_row(form.email) }}
+                            {{ form_row(form.sujet) }}
+                            {{ form_row(form.contenu) }}
+
+                            {{ form_rest(form) }}
+
+                <input type="submit" class="button button-alt" />
+            </form>
+        </section>
+    </section>
+</div>
+{% endblock %}

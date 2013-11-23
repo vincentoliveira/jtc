@@ -3,21 +3,33 @@
 {% block content %}
 
 <div class="container">
+    {% for flashMessage in app.session.flashbag.get('info') %}
+        <div class="byline">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <h1>{{ 'jtc.annonce.title'|trans }}</h1>
     <blockquote>{{ 'jtc.annonce.creer_par_mis_a_jour_le'|trans({'%utilisateur%':annonce.utilisateur, '%date_maj%':annonce.dateMaj|date('d/m/y')})|raw }}</blockquote>
 
+    
     <p>{{ 'jtc.annonce.depart_le'|trans }} <strong>{{ annonce.dateDepart|date('d/m/y') }}</strong></p>
     <p>
         {{ 'jtc.annonce.voyage'|trans }}
-        <strong>{{ annonce.villeDepart }}</strong>
-        <span class="glyphicon glyphicon-arrow-right">&nbsp;</span>
-        <strong>{{ annonce.villeArrive }}</strong>
-    </p>
+            <strong>{{ annonce.villeDepart }}</strong>
+            <span class="glyphicon glyphicon-arrow-right">&nbsp;</span>
+            <strong>{{ annonce.villeArrive }}</strong>
+        </p>
 
-    <p>{{ 'jtc.annonce.poids'|trans }} <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
-    <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
-    <p>{{ 'jtc.annonce.description'|trans }}</p>
-    <pre>{{ annonce.description }}</pre>
-</div>
+        <p>{{ 'jtc.annonce.poids'|trans }} <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
+        <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+        {% if annonce.description != "" %}
+            <p>{{ 'jtc.annonce.description'|trans }}</p>
+            <pre>{{ annonce.description }}</pre>
+        {% endif %}           
+
+        <a href="{{ path('jtc_annonce_contact', {id:annonce.id}) }}">
+            <button class="btn btn-success" type="submit">Contacter</button>
+        </a> 
+    </div>
 
 {% endblock %}
