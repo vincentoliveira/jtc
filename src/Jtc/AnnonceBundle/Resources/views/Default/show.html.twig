@@ -8,7 +8,13 @@
             {{ flashMessage }}
         </div>
     {% endfor %}
-    <h1>{{ 'jtc.annonce.title'|trans }}</h1>
+    <h1>{{ 'jtc.annonce.title'|trans }}
+        {% if annonce.type == annonce_type.transporteur %}
+            {{ 'jtc.annonce.transporteur'|trans }}
+        {% else %}
+            {{ 'jtc.annonce.expediteur'|trans }}
+        {% endif %}
+    </h1>
     <blockquote>{{ 'jtc.annonce.creer_par_mis_a_jour_le'|trans({'%utilisateur%':annonce.utilisateur, '%date_maj%':annonce.dateMaj|date('d/m/y')})|raw }}</blockquote>
 
     
@@ -27,9 +33,47 @@
             <pre>{{ annonce.description }}</pre>
         {% endif %}           
 
-        <a href="{{ path('jtc_annonce_contact', {id:annonce.id}) }}">
-            <button class="btn btn-success" type="submit">Contacter</button>
-        </a> 
+        {% if app.user == annonce.utilisateur %}
+            <a href="{{ path('jtc_annonce_edit', {id:annonce.id}) }}">
+                <button class="btn btn-success" type="submit">Modifier</button>
+            </a>
+            <button class="btn btn-danger btn-delete" type="submit">Supprimer l'annonce</button>
+        {% else %}
+            <a href="{{ path('jtc_annonce_contact', {id:annonce.id}) }}">
+                <button class="btn btn-success" type="submit">Contacter</button>
+            </a> 
+        {% endif %}
     </div>
 
+    <div id="dialog-confirm" title="{{ 'jtc.annonce.delete_popup_title'|trans }}">
+      <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>{{ 'jtc.annonce.delete_popup'|trans }}</p>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+{% spaceless %}
+    {{ parent() }}
+<script>
+    $(document).ready(function(){
+        $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Supprimer l'annonce": function() {
+                    window.location = "{{ path('jtc_annonce_delete', {id:annonce.id}) }}"
+                },
+                "Annuler": function() {
+                    $(this).dialog( "close" );
+                }
+            }
+        });
+        $('.btn-delete').click(function(e){
+            e.preventDefault();
+            $( "#dialog-confirm" ).dialog("open");
+        });
+    });
+    </script>
+{% endspaceless %}
 {% endblock %}

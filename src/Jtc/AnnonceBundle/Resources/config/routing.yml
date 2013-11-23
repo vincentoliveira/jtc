@@ -13,6 +13,14 @@ jtc_annonce_complete:
 jtc_annonce_show:
     pattern:  /annonce/{id}
     defaults: { _controller: JtcAnnonceBundle:Default:show }
+    
+jtc_annonce_edit:
+    pattern:  /annonce/{id}/edit
+    defaults: { _controller: JtcAnnonceBundle:Default:edit }
+    
+jtc_annonce_delete:
+    pattern:  /annonce/{id}/delete
+    defaults: { _controller: JtcAnnonceBundle:Default:delete }
 
 jtc_annonce_mes_annonces:
     pattern:  /mesannonces

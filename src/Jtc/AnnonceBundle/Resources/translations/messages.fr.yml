@@ -19,6 +19,11 @@ jtc:
     poids_du_colis: "Poids du colis (en kilogramme)" 
     prix_kilo: "Prix au kilo (en EUR)"
     info_complementaires: "Information complémentaires"
+ 
+  edit:
+    title: "Modification de mon annonce"
+    type_annonce: "Type d'annonce"
+    submit: "Modifier mon annonce"
     
   annonce:
     title: "Annonce"
@@ -35,6 +40,9 @@ jtc:
     unite_poids: "(kg)"
     unite_prix: "(EUR / kg)"
     description: "Description :"
+    
+    delete_popup_title: "Confirmation de suppression"
+    delete_popup: "Etes-vous sûr de vouloir supprimer cette annonce ?"
     
   mes_annonce:
     title: "Mes annonces"

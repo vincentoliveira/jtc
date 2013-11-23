@@ -22,12 +22,16 @@ class AnnonceService {
     /**
      * Check if POST $params are valid
      * @param array $params
+     * @param boolean $edit
      * @return array erros or true if params are valid
      */
-    public function isValid(Array $params) {
+    public function isValid(Array $params, $edit = false) {
         $errors = array();
 
-        $notEmptyFields = array('type', 'date_depart', 'ville_depart', 'ville_arrive');
+        $notEmptyFields = array('date_depart', 'ville_depart', 'ville_arrive');
+        if ($edit === false) {
+            $notEmptyFields[] = 'type';
+        }
         foreach ($notEmptyFields as $field) {
             $value = $params[$field];
             if (!isset($value) or empty($value)) {
@@ -35,16 +39,18 @@ class AnnonceService {
             }
         }
 
-        // check annonce type
-        $type = $params['type'];
-        $availableTypes = $this->container->getParameter('annonce.type');
-        if (!in_array($type, $availableTypes)) {
-            $errors['type'][] = 'bad_value';
+        if ($edit === false) {
+            // check annonce type
+            $type = $params['type'];
+            $availableTypes = $this->container->getParameter('annonce.type');
+            if (!in_array($type, $availableTypes)) {
+                $errors['type'][] = 'bad_value';
+            }
         }
 
         // check date_depart
         try {
-            $date = new \DateTime($this->getPostParams($params, 'date_depart'));
+            $date = $this->datetimeFromString($this->getPostParams($params, 'date_depart'));
             $now = new \DateTime();
             if ($date->getTimestamp() <= $now->getTimestamp()) {
                 $errors['date_depart'][] = 'date_past_value';
@@ -55,7 +61,7 @@ class AnnonceService {
 
         return empty($errors) ? true : $errors;
     }
-
+    
     /**
      * Add content from form
      * @param array $rowContent
@@ -82,12 +88,50 @@ class AnnonceService {
             $annonce->setStatut($statut);
 
             // date
-            $dateDepart = new \DateTime($this->getPostParams($params, 'date_depart'));
+            $dateDepart = $this->datetimeFromString($this->getPostParams($params, 'date_depart'));
             $annonce->setDateDepart($dateDepart);
 
             // formulaire
             $fields = array(
                 'setType' => 'type',
+                'setVilleDepart' => 'ville_depart',
+                'setVilleArrive' => 'ville_arrive',
+                'setDescription' => 'description',
+                'setPoids' => 'poids',
+                'setPrix' => 'prix',
+            );
+            foreach ($fields as $method => $field) {
+                if (method_exists($annonce, $method)) {
+                    $annonce->{$method}($this->getPostParams($params, $field));
+                }
+            }
+
+            $this->em->persist($annonce);
+            $this->em->flush();
+
+            return $annonce->getId();
+        } catch (\Exception $e) {
+            if ($this->container->getParameter("kernel.environment") == 'dev') {
+                throw $e;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Add content from form
+     * @param array $rowContent
+     * @param int $utilisateurId;
+     * @return int New content id
+     */
+    public function editAnnonce(Annonce $annonce, Array $params) {
+        try {
+            // date
+            $dateDepart = $this->datetimeFromString($this->getPostParams($params, 'date_depart'));
+            $annonce->setDateDepart($dateDepart);
+
+            // formulaire
+            $fields = array(
                 'setVilleDepart' => 'ville_depart',
                 'setVilleArrive' => 'ville_arrive',
                 'setDescription' => 'description',
@@ -150,6 +194,23 @@ class AnnonceService {
             return false;
         }
     }
+    
+    /**
+     * Récupère les annonces d'un utilisateurs
+     * 
+     * @param int $userId
+     * @return array
+     */
+    public function getAnnoncesFromUser($userId)
+    {
+        $statuts = $this->container->getParameter('annonce.status');
+        $statutId = $statuts['visible'];
+            
+        $repo = $this->em->getRepository('JtcAnnonceBundle:Annonce');
+        $annonces = $repo->getAnnoncesFromUser($userId, $statutId);
+        
+        return $annonces;
+    }
 
     /**
      * Get POST parameter or default value
@@ -182,4 +243,14 @@ class AnnonceService {
         return substr_replace($string, $replacement, $max_length);
     }
 
+    /**
+     * Create a datetime from a string
+     * 
+     * @param string $dateStr
+     * @return \DateTime
+     */
+    protected function datetimeFromString($dateStr)
+    {
+        return \DateTime::createFromFormat('d/m/Y', $dateStr);
+    }
 }

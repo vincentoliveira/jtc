@@ -98,6 +98,73 @@ class DefaultController extends BaseController
     }
     
     /**
+     * Edition d'une annonce
+     * 
+     * @param \Jtc\AnnonceBundle\Entity\Annonce $annonce
+     * @Template
+     * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
+     */
+    public function editAction(Annonce $annonce)
+    {
+        $user = $this->getUser();
+        
+        if ($user->getId() != $annonce->getUtilisateur()->getId()) {
+            return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
+        }
+        
+        $errors = array();
+        
+        $request = $this->getRequest();
+        $postData = $request->request->all();
+        if ($request->getMethod() == "POST") {
+            $formHandler = $this->get('jtc_annonce.annonce_service');
+
+            $isValid = $formHandler->isValid($postData, true);
+            if ($isValid === true) {
+                $annonceId = $formHandler->editAnnonce($annonce, $postData);
+                if ($annonceId === false) {
+                    $errors['internal'][] = 'internal';
+                } else {
+                    return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonceId));
+                }
+            } else {
+                $errors = $isValid;
+            }
+        }
+        
+        return array(
+            'annonce' => $annonce,
+            'errors' => $errors,
+        );
+    }
+    
+    /**
+     * Edition d'une annonce
+     * 
+     * @param \Jtc\AnnonceBundle\Entity\Annonce $annonce
+     * @Template
+     * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
+     */
+    public function deleteAction(Annonce $annonce)
+    {
+        $user = $this->getUser();
+        
+        if ($user->getId() != $annonce->getUtilisateur()->getId()) {
+            return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
+        }
+        
+        $statuts = $this->container->getParameter('annonce.status');
+        $statut = $statuts['supprime'];
+        $annonce->setStatut($statut);
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($annonce);
+        $em->flush();
+        
+        return $this->redirectToRoute('jtc_annonce_mes_annonces');
+    }
+    
+    /**
      * Visualisation d'une annonce
      * 
      * @param \Jtc\AnnonceBundle\Entity\Annonce $annonce
@@ -116,9 +183,9 @@ class DefaultController extends BaseController
      */
     public function mesAnnoncesAction()
     {
-        $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
+        $service = $this->get('jtc_annonce.annonce_service');
         $user = $this->getUser();
-        $annonces = $repo->getAnnoncesFromUser($user);
+        $annonces = $service->getAnnoncesFromUser($user->getId());
         
         return array('annonces' => $annonces);
     }
