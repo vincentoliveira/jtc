@@ -18,12 +18,17 @@ class AnnonceRepository extends EntityRepository
      * Reccupère les dernières annonces
      * @return array
      */
-    public function getLastAnnonce()
+    public function getLastAnnonce($type = null, $limit = null)
     {
         $qb = $this->createQueryBuilder('a');
-        $qb->setMaxResults('10');
+        if ($type != null) {
+            $qb->where('a.type = :type')->setParameter('type', $type);
+        }
+        if ($limit != null) {
+            $qb->setMaxResults($limit);
+        }
+
         $qb->add('orderBy', 'a.dateMaj DESC');
-        
         return $qb->getQuery()->getResult();
     }
 
@@ -57,5 +62,54 @@ class AnnonceRepository extends EntityRepository
                 ->orderBy('a.dateMaj', 'DESC');
         
         return $qb->getQuery()->getResult();
+    }
+    
+    public function getSearch($data, $type) 
+    {
+
+        if ($data['date'] != '') {
+            $date = date('Y-m-d H:i:s', strtotime($data['date']));
+        } else {
+            $date = date("Y-m-d H:i:s");
+        }
+        $villed = $data['villed'];
+        $villea = $data['villea'];
+        $kilos = $data['kilos'];
+        $prix = $data['prix'];
+
+        $qb = $this->createQueryBuilder('a');
+        if ($date != '') {
+            $qb->where('a.date >= :date')
+                    ->setParameter('date', $date);
+        }
+
+        if ($villed != "") {
+            $qb->andWhere('a.villed = :villed')
+                    ->setParameter('villed', $villed);
+        }
+
+
+        if ($villea != "") {
+            $qb->andWhere('a.villea = :villea')
+                    ->setParameter('villea', $villea);
+        }
+
+        if ($kilos != "") {
+            $qb->andWhere('a.kilos = :kilos')
+                    ->setParameter('kilos', $kilos);
+        }
+
+        if ($prix != "") {
+            $qb->andWhere('a.prix = :prix')
+                    ->setParameter('prix', $prix);
+        }
+        
+        if ($type != "") {
+            $qb->andWhere('a.type = :type')
+                    ->setParameter('type', $type);
+        }
+
+        $qb->add('orderBy', 'a.date ASC');
+        return $qb;
     }
 }

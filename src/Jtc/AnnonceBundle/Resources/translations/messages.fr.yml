@@ -37,6 +37,12 @@ jtc:
   mes_annonce:
     title: "Mes annonces"
     aucune_annonce: "Vous n'avez pas encore créer d'annonces"
+  
+  voyageurs:
+    title: "Annonces de voyageurs"
+  
+  expediteurs:
+    title: "Annonces d'expéditeurs"
 
 form:
   error:

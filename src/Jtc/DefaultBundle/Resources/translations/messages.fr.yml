@@ -9,6 +9,8 @@ menu:
   title: "Zecolis"
   ajouter_annonce: "Ajouter une annonce"
   chercher_annonce: "Chercher une annonce"
+  expediteurs: "Les expéditeurs"
+  voyageurs: "Les voyageurs"
   mes_annonce: "Mes annonces"
   bonjour_utilisateur: "Bonjour <strong>%utilisateur%</strong>"
   connexion: "Connexion"

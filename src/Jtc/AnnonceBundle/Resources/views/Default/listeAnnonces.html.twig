@@ -1,4 +1,10 @@
     <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
+            {% if annonce.type == 'voyageur' %}
+                <span class="listVoyageur"> {{ annonce.type }} </span>
+            {% else %}    
+                <span class="listExpediteur">{{ annonce.type }} </span>
+            {% endif %}       
+            
             <span class="big">{{ annonce.dateDepart|date('d/m/Y') }} </span>
             - Départ : <span class="fontblue"> {{ annonce.villeDepart }} </span>
             / Arrivé : <span class="fontdarkpink"> {{ annonce.villeArrive }} </span>

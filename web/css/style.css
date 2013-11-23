@@ -1,1 +1,10 @@
 .error{color:red;}
+.blue                   { background: #3c5a98; }
+.blue:hover		{ background: #4c6aa8; }
+.darkpink		{ background: #c4376b; }
+.darkpink:hover		{ background: #d4477b; }
+.fontblue               { color: #3c5a98 !important; font-size: 25px; font-weight: bold}
+.fontdarkpink		{ color: #c4376b !important; font-size: 25px; font-weight: bold}
+.big                    {font-size: 25px; font-weight: bold}
+.listVoyageur               {font-size: 25px; font-weight: bold; color: grey}
+.listExpediteur             {font-size: 25px; font-weight: bold; color : green}

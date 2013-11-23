@@ -18,7 +18,7 @@ class DefaultController extends BaseController
     public function indexAction()
     {
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
-        $lastAnnonce = $repo->getLastAnnonce();
+        $lastAnnonce = $repo->getLastAnnonce(null, 10);
         $todayAnnonce = $repo->getLeavingToday();
         
         return array(
@@ -130,8 +130,7 @@ class DefaultController extends BaseController
     public function voyageursAction()
     {
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
-        $annonces = $repo->findByType('voyageur');
-        
+        $annonces = $repo->getLastAnnonce('voyageur');
         return array('annonces' => $annonces);
     }
     
@@ -143,8 +142,7 @@ class DefaultController extends BaseController
     public function expediteursAction()
     {
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
-        $annonces = $repo->findByType('expediteur');
-        
+        $annonces = $repo->getLastAnnonce('expediteur');
         return array('annonces' => $annonces);
     }
 }
