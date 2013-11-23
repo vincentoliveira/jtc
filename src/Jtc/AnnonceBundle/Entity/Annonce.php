@@ -32,7 +32,7 @@ class Annonce
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDepart", type="datetime")
+     * @ORM\Column(name="date_depart", type="datetime")
      */
     private $dateDepart;
     

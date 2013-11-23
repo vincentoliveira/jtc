@@ -5,8 +5,8 @@
 <div class="container">
     <h1>{{ 'jtc.voyageurs.title'|trans }}</h1>
 
-    <form role="form" method="POST">
-
+    <form role="form" action="{{ path('jtc_annonce_search') }}" method="POST">
+        <input type="hidden"  name='type'  value="voyageur">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ 'jtc.create.information_voyage'|trans }}</h3>
@@ -40,16 +40,11 @@
                 <div class="form-group col-md-6 voyageur">
                     <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
                     <input type="number" class="form-control" id="prix" name="prix" value="{{ old_data.prix|default('') }}" />
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group col-md-12 voyageur">
-                    <label for="description">{{ 'jtc.create.info_complementaires'|trans }}</label>
-                    <textarea class="form-control" rows="2" name="description">{{ old_data.description|default('') }}</textarea>
-                </div>
+                </div>               
             </div>
         </div>
-
-        <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.search.submit'|trans }}</button><br/><br/>
+        
+        <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.search.submit'|trans }}</button><br /><br />
     </form>
     <div class="panel panel-default voyageur">
         <div class="panel-heading">

@@ -4,13 +4,57 @@
 
 <div class="container">
     <h1>{{ 'jtc.expediteurs.title'|trans }}</h1>
-    <ul class="dropotron">
-    {% for annonce in annonces %}
-            <li style="white-space: nowrap;">{% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}</li>
-    {% else %}
-            <li style="white-space: nowrap;">{{ 'jtc.mes_annonce.aucune_annonce'|trans }}</li>
-    {% endfor %}
-    </ul>
-</div>
+
+    <form role="form" action="{{ path('jtc_annonce_search') }}" method="POST">
+        <input type="hidden"  name="type"  value='expediteur' >
+        <input type="hidden"  name="prix"  value='' >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_voyage'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    <label for="date_depart">{{ 'jtc.create.date_depart'|trans }}</label>
+                    <input type="date" class="form-control" id="date_depart" name="date_depart" value="{{ old_data.date_depart|default('') }}" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-6">
+                    <label for="ville_depart">{{ 'jtc.create.ville_depart'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_depart" name="ville_depart" value="{{ old_data.ville_depart|default('') }}" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ville_arrive">{{ 'jtc.create.ville_arrive'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_arrive" name="ville_arrive" value="{{ old_data.ville_arrive|default('') }}" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default expediteur">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_colis'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    <label class="expediteur" for="poids">{{ 'jtc.create.poids_disponible'|trans }}</label>
+                    <input type="number" class="form-control" id="poids" name="poids" value="{{ old_data.poids|default('') }}" />
+                </div>           
+            </div>
+        </div>
+
+        <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.search.submit'|trans }}</button><br /><br />
+    </form>
+    <div class="panel panel-default expediteur">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'jtc.liste.expediteurs'|trans }}</h3>
+        </div>
+        <ul class="dropotron">
+                {% for annonce in annonces %}
+                <li style="white-space: nowrap;">{% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}</li>
+                {% else %}
+                <li style="white-space: nowrap;">{{ 'jtc.mes_annonce.aucune_annonce'|trans }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}

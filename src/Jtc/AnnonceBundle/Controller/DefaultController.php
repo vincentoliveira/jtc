@@ -145,4 +145,36 @@ class DefaultController extends BaseController
         $annonces = $repo->getLastAnnonce('expediteur');
         return array('annonces' => $annonces);
     }
+    
+    /**
+     * Recherche des annonces 'expediteur' ou 'voyageur'
+     * 
+     * @Template()
+     */
+    public function searchAction() 
+    {
+        $request = $this->container->get('request');
+        $postData = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $aRepository = $em->getRepository('JtcAnnonceBundle:Annonce');
+
+        if (empty($postData)) {
+            // rediriger mais ou ? 
+        }
+
+        if (!empty($postData)) {
+            $type = $postData['type'];
+        }
+        $pageToGoBackTo = ($type == 'voyageur') ? 'JtcAnnonceBundle:Default:voyageurs.html.twig' : 'JtcAnnonceBundle:Default:expediteurs.html.twig';
+        if ($request->getMethod() == 'POST') {
+            $qb = $aRepository->doSearch($postData);
+            $annonces = $qb->getQuery()->getResult();
+            return $this->container->get('templating')->renderResponse($pageToGoBackTo, array(
+                        'annonces' => $annonces
+                    ));
+        }
+        $annonces = $aRepository->getLastAnnonce($type);
+        return $this->render($pageToGoBackTo, array('annonces' => $annonces
+                ));
+    }
 }

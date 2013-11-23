@@ -64,39 +64,35 @@ class AnnonceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
     
-    public function getSearch($data, $type) 
+    public function doSearch($data) 
     {
-
-        if ($data['date'] != '') {
-            $date = date('Y-m-d H:i:s', strtotime($data['date']));
-        } else {
-            $date = date("Y-m-d H:i:s");
-        }
-        $villed = $data['villed'];
-        $villea = $data['villea'];
-        $kilos = $data['kilos'];
+        $ville_depart = $data['ville_depart'];
+        $ville_arrive = $data['ville_arrive'];
+        $poids = $data['poids'];
         $prix = $data['prix'];
+        $type = $data['type'];
 
         $qb = $this->createQueryBuilder('a');
-        if ($date != '') {
-            $qb->where('a.date >= :date')
-                    ->setParameter('date', $date);
+        if ($data['date_depart'] != '') {
+            $date = date('Y-m-d H:i:s', strtotime($data['date_depart']));
+            $qb->where('a.dateDepart = :date_depart')
+                    ->setParameter('date_depart', $date);
         }
 
-        if ($villed != "") {
-            $qb->andWhere('a.villed = :villed')
-                    ->setParameter('villed', $villed);
+        if ($ville_depart != "") {
+            $qb->andWhere('a.villeDepart = :ville_depart')
+                    ->setParameter('ville_depart', $ville_depart);
         }
 
 
-        if ($villea != "") {
-            $qb->andWhere('a.villea = :villea')
-                    ->setParameter('villea', $villea);
+        if ($ville_arrive != "") {
+            $qb->andWhere('a.villeArrive = :ville_arrive')
+                    ->setParameter('ville_arrive', $ville_arrive);
         }
 
-        if ($kilos != "") {
-            $qb->andWhere('a.kilos = :kilos')
-                    ->setParameter('kilos', $kilos);
+        if ($poids != "") {
+            $qb->andWhere('a.poids = :poids')
+                    ->setParameter('poids', $poids);
         }
 
         if ($prix != "") {
@@ -109,7 +105,7 @@ class AnnonceRepository extends EntityRepository
                     ->setParameter('type', $type);
         }
 
-        $qb->add('orderBy', 'a.date ASC');
+        $qb->add('orderBy', 'a.dateDepart ASC');
         return $qb;
     }
 }

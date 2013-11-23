@@ -25,3 +25,7 @@ jtc_annonce_voyageurs:
 jtc_annonce_expediteurs:
     pattern:  /expediteurs
     defaults: { _controller: JtcAnnonceBundle:Default:expediteurs }
+    
+jtc_annonce_search:
+    pattern:  /recherche
+    defaults: { _controller: JtcAnnonceBundle:Default:search }
