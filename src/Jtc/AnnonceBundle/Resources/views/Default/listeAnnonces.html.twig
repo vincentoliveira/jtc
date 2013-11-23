@@ -1,12 +1,12 @@
     <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
-            {% if annonce.type == 'voyageur' %}
-                <span class="listVoyageur"> {{ annonce.type }} </span>
-            {% else %}    
-                <span class="listExpediteur">{{ annonce.type }} </span>
-            {% endif %}       
-            
+            <span class="listVoyageur">
+                {% if annonce.type == annonce_type.transporteur %}
+                    {{ 'jtc.annonce.transporteur'|trans }}
+                {% else %}
+                    {{ 'jtc.annonce.expediteur'|trans }}
+                {% endif %}
+            </span>
             <span class="big">{{ annonce.dateDepart|date('d/m/Y') }} </span>
-            - Départ : <span class="fontblue"> {{ annonce.villeDepart }} </span>
-            / Arrivé : <span class="fontdarkpink"> {{ annonce.villeArrive }} </span>
+            <span class="fontblue">{{ annonce.villeDepart }} <span class="glyphicon glyphicon-arrow-right"></span> {{ annonce.villeArrive }} </span>
             {% if annonce.description is not empty %}- <em>{{ annonce.description }}</em>{% endif %}
     </a>

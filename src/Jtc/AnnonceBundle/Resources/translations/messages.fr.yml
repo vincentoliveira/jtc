@@ -22,6 +22,8 @@ jtc:
     
   annonce:
     title: "Annonce"
+    expediteur: "Expediteur"
+    transporteur: "Transporteur"
     creer_par_mis_a_jour_le: "Créée par <strong>%utilisateur%</strong>, mis à jour le %date_maj%"
     depart_le: "Départ prévu le :"
     voyage: "Voyage :"
