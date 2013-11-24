@@ -9,7 +9,6 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -27,6 +26,9 @@ class DefaultController extends BaseController
      */
     public function authentificateBeforeAnnonceAction(Annonce $annonce, Request $request)
     {
+        $session = $request->getSession();
+        $session->set('draf_content_id', $annonce->getId());
+        
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -61,10 +63,15 @@ class DefaultController extends BaseController
                 return $response;
             }
         }
+        
+        $csrfToken = $this->container->has('form.csrf_provider')
+            ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
+            : null;
 
         return array(
             'form' => $form->createView(),
             'id' => $annonce->getId(),
+            'csrf_token' => $csrfToken,
         );
     }
 }

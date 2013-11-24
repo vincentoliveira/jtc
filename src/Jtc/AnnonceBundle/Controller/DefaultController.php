@@ -6,6 +6,7 @@ use Jtc\DefaultBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Jtc\AnnonceBundle\Entity\Annonce;
 use Jtc\AnnonceBundle\Form\AnnonceContactType;
 
@@ -18,6 +19,13 @@ class DefaultController extends BaseController
      */
     public function indexAction()
     {
+        $session = $this->getRequest()->getSession();
+        $drafContentId = $session->get('draf_content_id');
+        if (isset($drafContentId)) {
+            $session->set('$drafContentId', null);
+            return $this->redirectToRoute('jtc_annonce_complete', array('id' => $drafContentId));
+        }
+        
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $lastAnnonce = $repo->getLastAnnonce(null, 10);
         $todayAnnonce = $repo->getLeavingToday();
@@ -78,6 +86,9 @@ class DefaultController extends BaseController
      */
     public function completeAction(Annonce $annonce)
     {
+        $session = $this->getRequest()->getSession();
+        $session->set('$drafContentId', null);
+            
         $annonceUtilisateur = $annonce->getUtilisateur();
         $lastUpdate = $annonce->getDateMaj();
         $timeToRegisterBeforeAnnonce = $this->container->getParameter('time_to_register_before_annonce');

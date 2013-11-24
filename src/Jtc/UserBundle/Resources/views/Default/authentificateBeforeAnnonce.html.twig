@@ -2,9 +2,9 @@
 
 {% block content %}
     <div class="container">
-        <form class="col-md-6" action="#" method="post">
+        <form class="col-md-6" action="{{ path('fos_user_security_check') }}" method="post">
             <h3>{{ 'user.connexion'|trans }}</h3>
-            {#<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />#}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <div class="form-group">
                 <label for="username">{{ 'security.login.username'|trans }}</label>
