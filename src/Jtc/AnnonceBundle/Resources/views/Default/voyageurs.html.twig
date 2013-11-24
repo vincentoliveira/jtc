@@ -6,7 +6,7 @@
     <h1>{{ 'jtc.voyageurs.title'|trans }}</h1>
 
     <form role="form" action="{{ path('jtc_annonce_search') }}" method="POST">
-        <input type="hidden"  name='type'  value="voyageur">
+        <input type="hidden"  name='type'  value={{ annonce_type.voyageur }}>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ 'jtc.create.information_voyage'|trans }}</h3>

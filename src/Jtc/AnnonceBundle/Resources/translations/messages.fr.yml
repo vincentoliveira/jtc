@@ -28,14 +28,16 @@ jtc:
   annonce:
     title: "Annonce"
     expediteur: "Expediteur"
-    transporteur: "Transporteur"
+    voyageur: "Voyageur"
     creer_par_mis_a_jour_le: "Créée par <strong>%utilisateur%</strong>, mis à jour le %date_maj%"
     depart_le: "Départ prévu le :"
     voyage: "Voyage :"
     information_voyage: "Information sur le voyage"
     information_colis: "Information sur le colis"
     info_complementaires: "Information complémentaires"
-    poids: "Poids disponible :"
+    poids:
+          voyageur : "Poids disponible :"
+          expediteur : "Poids désiré :"
     prix: "Prix :"
     unite_poids: "(kg)"
     unite_prix: "(EUR / kg)"
@@ -49,10 +51,10 @@ jtc:
     aucune_annonce: "Vous n'avez pas encore créer d'annonces"
   
   voyageurs:
-    title: "Annonces de voyageurs"
+    title: "Trouver des annonces de voyageurs"
   
   expediteurs:
-    title: "Annonces d'expéditeurs"
+    title: "Trouver des annonces d'expéditeurs"
 
 form:
   error:

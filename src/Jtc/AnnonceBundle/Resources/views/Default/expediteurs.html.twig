@@ -6,7 +6,7 @@
     <h1>{{ 'jtc.expediteurs.title'|trans }}</h1>
 
     <form role="form" action="{{ path('jtc_annonce_search') }}" method="POST">
-        <input type="hidden"  name="type"  value='expediteur' >
+        <input type="hidden"  name="type"  value={{ annonce_type.expediteur }} >
         <input type="hidden"  name="prix"  value='' >
         <div class="panel panel-default">
             <div class="panel-heading">

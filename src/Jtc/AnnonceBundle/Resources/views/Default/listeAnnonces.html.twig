@@ -1,7 +1,7 @@
     <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
             <span class="listVoyageur">
-                {% if annonce.type == annonce_type.transporteur %}
-                    {{ 'jtc.annonce.transporteur'|trans }}
+                {% if annonce.type == annonce_type.voyageur %}
+                    {{ 'jtc.annonce.voyageur'|trans }}
                 {% else %}
                     {{ 'jtc.annonce.expediteur'|trans }}
                 {% endif %}

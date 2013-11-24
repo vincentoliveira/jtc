@@ -197,8 +197,10 @@ class DefaultController extends BaseController
      */
     public function voyageursAction()
     {
+        $twig = $this->container->get('twig');
+        $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
-        $annonces = $repo->getLastAnnonce('voyageur');
+        $annonces = $repo->getLastAnnonce($globals['annonce_type']['voyageur']);
         return array('annonces' => $annonces);
     }
     
@@ -209,8 +211,10 @@ class DefaultController extends BaseController
      */
     public function expediteursAction()
     {
+        $twig = $this->container->get('twig');
+        $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
-        $annonces = $repo->getLastAnnonce('expediteur');
+        $annonces = $repo->getLastAnnonce($globals['annonce_type']['expediteur']);
         return array('annonces' => $annonces);
     }
     
@@ -233,7 +237,10 @@ class DefaultController extends BaseController
         if (!empty($postData)) {
             $type = $postData['type'];
         }
-        $pageToGoBackTo = ($type == 'voyageur') ? 'JtcAnnonceBundle:Default:voyageurs.html.twig' : 'JtcAnnonceBundle:Default:expediteurs.html.twig';
+        $twig = $this->container->get('twig');
+        $globals = $twig->getGlobals();
+        
+        $pageToGoBackTo = ($type == $globals['annonce_type']['voyageur']) ? 'JtcAnnonceBundle:Default:voyageurs.html.twig' : 'JtcAnnonceBundle:Default:expediteurs.html.twig';
         if ($request->getMethod() == 'POST') {
             $qb = $aRepository->doSearch($postData);
             $annonces = $qb->getQuery()->getResult();

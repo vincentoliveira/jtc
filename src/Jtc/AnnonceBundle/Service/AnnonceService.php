@@ -91,9 +91,11 @@ class AnnonceService {
             $dateDepart = $this->datetimeFromString($this->getPostParams($params, 'date_depart'));
             $annonce->setDateDepart($dateDepart);
 
+            // type
+            $type = ($this->getPostParams($params, 'type') == 'voyageur') ? 0 : 1;
+            $annonce->setType($type);
             // formulaire
             $fields = array(
-                'setType' => 'type',
                 'setVilleDepart' => 'ville_depart',
                 'setVilleArrive' => 'ville_arrive',
                 'setDescription' => 'description',

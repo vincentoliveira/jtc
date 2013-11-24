@@ -17,7 +17,7 @@
             </div>
             <div class="panel-body">
                 <strong>
-                {% if annonce.type == annonce_type.transporteur %}
+                {% if annonce.type == annonce_type.voyageur %}
                     {{ 'jtc.create.voyageur_description'|trans|raw }}
                 {% else %}
                     {{ 'jtc.create.expediteur_description'|trans|raw }}
@@ -52,14 +52,14 @@
             </div>
             <div class="panel-body">
                 <div class="form-group col-md-6">
-                    {% if annonce.type == annonce_type.transporteur %}
+                    {% if annonce.type == annonce_type.voyageur %}
                     <label class="voyageur" for="poids">{{ 'jtc.create.poids_disponible'|trans }}</label>
                     {% else %}
                     <label class="expediteur" for="poids">{{ 'jtc.create.poids_du_colis'|trans }}</label>
                     {% endif %}
                     <input type="number" class="form-control" id="poids" name="poids" value="{{ annonce.poids }}" />
                 </div>
-                {% if annonce.type == annonce_type.transporteur %}
+                {% if annonce.type == annonce_type.voyageur %}
                 <div class="form-group col-md-6 voyageur">
                     <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
                     <input type="number" class="form-control" id="prix" name="prix" value="{{ annonce.prix }}" />

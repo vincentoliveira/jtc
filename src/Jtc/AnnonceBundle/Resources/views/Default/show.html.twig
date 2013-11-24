@@ -9,8 +9,8 @@
         </div>
     {% endfor %}
     <h1>{{ 'jtc.annonce.title'|trans }}
-        {% if annonce.type == annonce_type.transporteur %}
-            {{ 'jtc.annonce.transporteur'|trans }}
+        {% if annonce.type == annonce_type.voyageur %}
+            {{ 'jtc.annonce.voyageur'|trans }}
         {% else %}
             {{ 'jtc.annonce.expediteur'|trans }}
         {% endif %}
@@ -25,9 +25,16 @@
             <span class="glyphicon glyphicon-arrow-right"></span>
             <strong>{{ annonce.villeArrive }}</strong>
         </p>
-
-        <p>{{ 'jtc.annonce.poids'|trans }} <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
-        <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+        <p>
+        {% if annonce.type == annonce_type.voyageur %}
+            {{ 'jtc.annonce.poids.voyageur'|trans }}
+        {% else %}
+            {{ 'jtc.annonce.poids.expediteur'|trans }}
+        {% endif %}    
+        <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
+        {% if annonce.type == annonce_type.voyageur %}
+            <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+        {% endif %}    
         {% if annonce.description != "" %}
             <p>{{ 'jtc.annonce.description'|trans }}</p>
             <pre>{{ annonce.description }}</pre>

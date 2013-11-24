@@ -4,7 +4,7 @@ imports:
     
 parameters:
     annonce.type:
-        transporteur: 0
+        voyageur: 0
         expediteur: 1
         
     annonce.status:
