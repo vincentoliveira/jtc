@@ -1,0 +1,79 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ 'jtc.edit.title'|trans }}</h1>
+    <div class="col-md-12">
+        {% for field, fieldErrors in errors %}
+            {% for error in fieldErrors %}
+                <p class="error">{{ ('form.error.'~error)|trans({'%field%':field})|raw }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <form role="form" method="POST">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.edit.type_annonce'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <strong>
+                {% if annonce.type == annonce_type.transporteur %}
+                    {{ 'jtc.create.voyageur_description'|trans|raw }}
+                {% else %}
+                    {{ 'jtc.create.expediteur_description'|trans|raw }}
+                {% endif %}
+                </strong>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_voyage'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    <label for="date_depart">{{ 'jtc.create.date_depart'|trans }}</label>
+                    <input type="text" class="form-control date" id="date_depart" name="date_depart" value="{{ annonce.dateDepart|date('d/m/Y') }}" />
+                </div>
+                <div class="clearfix"></div>
+                <div class="form-group col-md-6">
+                    <label for="ville_depart">{{ 'jtc.create.ville_depart'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_depart" name="ville_depart" value="{{ annonce.villeDepart }}" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ville_arrive">{{ 'jtc.create.ville_arrive'|trans }}</label>
+                    <input type="text" class="form-control" id="ville_arrive" name="ville_arrive" value="{{ annonce.villeArrive }}" />
+                </div>
+            </div>
+        </div>
+            
+        <div class="panel panel-default voyageur expediteur">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'jtc.create.information_colis'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group col-md-6">
+                    {% if annonce.type == annonce_type.transporteur %}
+                    <label class="voyageur" for="poids">{{ 'jtc.create.poids_disponible'|trans }}</label>
+                    {% else %}
+                    <label class="expediteur" for="poids">{{ 'jtc.create.poids_du_colis'|trans }}</label>
+                    {% endif %}
+                    <input type="number" class="form-control" id="poids" name="poids" value="{{ annonce.poids }}" />
+                </div>
+                {% if annonce.type == annonce_type.transporteur %}
+                <div class="form-group col-md-6 voyageur">
+                    <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
+                    <input type="number" class="form-control" id="prix" name="prix" value="{{ annonce.prix }}" />
+                </div>
+                {% endif %}
+                <div class="clearfix"></div>
+                <div class="form-group col-md-12">
+                    <label for="description">{{ 'jtc.create.info_complementaires'|trans }}</label>
+                    <textarea class="form-control" rows="2" name="description">{{ annonce.description }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.edit.submit'|trans }}</button>
+    </form>
+</div>
+{% endblock %}
