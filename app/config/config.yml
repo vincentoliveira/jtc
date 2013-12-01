@@ -24,6 +24,7 @@ parameters:
         jtc_annonce_mes_annonces: ~
         fos_user_security_login: ~
         fos_user_registration_register:
+            fos_user_registration_check_email: ~
             fos_user_registration_confirmed: ~
         fos_user_profile_show:
             fos_user_profile_edit: ~
@@ -112,6 +113,8 @@ fos_user:
     firewall_name: main
     user_class: Jtc\UserBundle\Entity\User
     registration:
+        confirmation:
+            enabled: true
         form:
             type: jtc_registration
     profile:

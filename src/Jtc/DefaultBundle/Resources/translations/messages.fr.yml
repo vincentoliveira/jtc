@@ -33,3 +33,4 @@ route:
     fos_user_resetting_send_email: "Confirmation"
     fos_user_resetting_check_email: "Confirmation"
     fos_user_resetting_reset: "Nouveau mot de passe"
+    fos_user_registration_check_email: "Vérification par email"

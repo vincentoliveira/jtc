@@ -55,10 +55,11 @@ registration:
     flash:
         user_created: L'utilisateur a été créé avec succès
     email:
-        subject: Bienvenue %username% !
+        subject: Zecolis.com - Bienvenue %username% !
         message: |
             Bonjour %username% !
 
+            Vous venez de vous inscrire sur le site <a href="zecolis.com">zecolis.com</a>.
             Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
 
             Cordialement,

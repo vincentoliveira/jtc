@@ -37,7 +37,7 @@ class DefaultController extends BaseController
         $dispatcher = $this->container->get('event_dispatcher');
 
         $user = $userManager->createUser();
-        $user->setEnabled(true);
+        $user->setEnabled(false);
 
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
 
@@ -52,12 +52,17 @@ class DefaultController extends BaseController
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
                 $userManager->updateUser($user);
-
+                
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->container->get('router')->generate('jtc_annonce_complete', array('id' => $annonce->getId()));
+                    $url = $this->container->get('router')->generate('fos_user_registration_confirmed');
                     $response = new RedirectResponse($url);
                 }
 
+                $annonce->setUtilisateur($user);
+                $em = $this->container->get('doctrine')->getEntityManager();
+                $em->persist($annonce);
+                $em->flush();
+                
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
                 return $response;

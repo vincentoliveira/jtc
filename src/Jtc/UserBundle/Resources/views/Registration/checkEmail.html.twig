@@ -1,0 +1,7 @@
+{% extends "JtcDefaultBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="container">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+{% endblock content %}
