@@ -1,6 +1,6 @@
 # language: fr
 @utilisateur @profil
-Fonctionnalité: Connexion
+Fonctionnalité: Profil
 
 
 Scénario: 22.1 - Profil non connecté

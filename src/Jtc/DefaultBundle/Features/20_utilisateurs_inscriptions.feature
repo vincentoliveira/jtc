@@ -18,7 +18,7 @@ Scénario: 20.2 - Inscription OK
     Et je remplis "fos_user_registration_form[plainPassword][first]" avec "test20.2"
     Et je remplis "fos_user_registration_form[plainPassword][second]" avec "test20.2"
     Lorsque je presse "submit"
-    Alors je devrais voir "Bonjour test20.2"
+    Alors je devrais voir "Un e-mail a été envoyé à l'adresse test20.2@zecolis.com"
 
 Scénario: 20.3 - Inscription KO - Mot de passe
     Soit je supprime l'utilisateur "test20.3"

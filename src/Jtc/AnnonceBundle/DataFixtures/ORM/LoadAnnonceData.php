@@ -39,7 +39,7 @@ class LoadAnnonceData extends AbstractFixture implements ContainerAwareInterface
         $status = $statuses['visible'];
         
         $types = $this->container->getParameter('annonce.type');
-        $type = $types['transporteur'];
+        $type = $types['voyageur'];
         $type2 = $types['expediteur'];
         
         $date1 = new \DateTime();
