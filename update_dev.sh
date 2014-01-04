@@ -11,15 +11,16 @@ fi
 chmod -R 0777 app/cache
 chmod -R 0777 app/logs
 
-sudo -u www-data php app/console doctrine:database:drop --force
-sudo -u www-data php app/console doctrine:database:create
-sudo -u www-data php app/console doctrine:schema:update --force
+php app/console doctrine:database:drop --force
+php app/console doctrine:database:create
+php app/console doctrine:schema:update --force
 
-sudo -u www-data php app/console doctrine:fixtures:load --append
+php app/console doctrine:fixtures:load --append
 
-sudo -u www-data php app/console assets:install web --symlink
+php app/console assets:install web --symlink
 
-sudo -u www-data php app/console cache:clear --no-warmup
+php app/console cache:clear --no-warmup
+rm -rf app/cache/*
 chmod -R 0777 app/cache
 chmod -R 0777 app/logs
 chown -R www-data:www-data *

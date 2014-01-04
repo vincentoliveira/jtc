@@ -8,3 +8,11 @@
 .big                    {font-size: 25px; font-weight: bold}
 .listVoyageur               {font-size: 25px; font-weight: bold; color: grey}
 .listExpediteur             {font-size: 25px; font-weight: bold; color : green}
+
+.navbar-brand img{height:100px;width:130px;}
+.navbar-nav{margin: 80px 0 0;}
+.navbar-nav > li{margin: 0 10px;}
+
+.nav-ajouter{background: url('../images/icons/ajouter.png') no-repeat left 50%;padding-left: 30px !important;}
+.nav-voyageur{background: url('../images/icons/voyageur.png') no-repeat left 50%;padding-left: 30px !important;}
+.nav-expediteur{background: url('../images/icons/expediteur.png') no-repeat left 50%;padding-left: 40px !important;}
