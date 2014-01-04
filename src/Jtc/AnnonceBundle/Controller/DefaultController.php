@@ -17,6 +17,18 @@ class DefaultController extends BaseController
      * 
      * @Template
      */
+    
+    public $transports = array(
+        1 => array('id' => 1, 'label' => 'jtc.transport.voiture'),
+        2 => array('id' => 2, 'label' => 'jtc.transport.train'),
+        3 => array('id' => 3, 'label' => 'jtc.transport.avion')
+    );
+    
+    public $colis = array(
+        1 => array('id' => 1, 'label' => 'jtc.colis.documents'),
+        2 => array('id' => 2, 'label' => 'jtc.colis.vetements')
+    );
+      
     public function indexAction()
     {
         $session = $this->getRequest()->getSession();
@@ -50,7 +62,7 @@ class DefaultController extends BaseController
         $postData = $request->request->all();
         if ($request->getMethod() == "POST") {
             $formHandler = $this->get('jtc_annonce.annonce_service');
-
+            var_dump($postData);
             $isValid = $formHandler->isValid($postData);
             if ($isValid === true) {
                 $utilisateur = $this->getUser();
@@ -73,6 +85,8 @@ class DefaultController extends BaseController
         return array(
             'errors' => $errors,
             'old_data' => $postData,
+            'transports' => $this->transports,
+            'colis' => $this->colis,
         );
     }
     
@@ -184,7 +198,9 @@ class DefaultController extends BaseController
      */
     public function showAction(Annonce $annonce)
     {
-        return array('annonce' => $annonce);
+        return array('annonce' => $annonce,            
+            'transports' => $this->transports,
+            'colis' => $this->colis,);
     }
 
     /**

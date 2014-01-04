@@ -28,7 +28,7 @@ class AnnonceService {
     public function isValid(Array $params, $edit = false) {
         $errors = array();
 
-        $notEmptyFields = array('date_depart', 'ville_depart', 'ville_arrive');
+        $notEmptyFields = array('date_depart', 'ville_depart', 'ville_arrive', 'type_transport', 'type_colis');
         if ($edit === false) {
             $notEmptyFields[] = 'type';
         }

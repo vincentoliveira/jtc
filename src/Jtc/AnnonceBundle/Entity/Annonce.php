@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Jtc\AnnonceBundle\Repository\AnnonceRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Annonce
-{
+class Annonce {
+
     /**
      * @var integer
      *
@@ -22,35 +22,35 @@ class Annonce
      */
     private $id;
 
-     /**
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_maj", type="datetime")
      */
     private $dateMaj;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_depart", type="datetime")
      */
     private $dateDepart;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="statut", type="integer", length=2)
      */
     private $statut;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=2)
      */
     private $type;
-    
-     /**
+
+    /**
      * @var Jtc\UserBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="Jtc\UserBundle\Entity\User")
@@ -58,12 +58,11 @@ class Annonce
      */
     private $utilisateur;
 
-     /**
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
-    
     private $description;
 
     /**
@@ -72,7 +71,7 @@ class Annonce
      * @ORM\Column(name="ville_depart", type="string", length=255)
      */
     private $villeDepart;
-    
+
     /**
      * @var string
      *
@@ -94,12 +93,24 @@ class Annonce
      */
     private $prix;
 
-    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type_colis", type="integer", nullable=true)
+     */
+    private $typeColis;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type_transport", type="integer", nullable=true)
+     */
+    private $typeTransport;
+
     /**
      * @ORM\PrePersist()
      */
-    public function prePersist()
-    {
+    public function prePersist() {
         $this->dateMaj = new \DateTime();
     }
 
@@ -108,8 +119,7 @@ class Annonce
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -119,10 +129,9 @@ class Annonce
      * @param \DateTime $dateMaj
      * @return Annonce
      */
-    public function setDateMaj($dateMaj)
-    {
+    public function setDateMaj($dateMaj) {
         $this->dateMaj = $dateMaj;
-    
+
         return $this;
     }
 
@@ -131,8 +140,7 @@ class Annonce
      *
      * @return \DateTime 
      */
-    public function getDateMaj()
-    {
+    public function getDateMaj() {
         return $this->dateMaj;
     }
 
@@ -142,10 +150,9 @@ class Annonce
      * @param \DateTime $dateDepart
      * @return Annonce
      */
-    public function setDateDepart($dateDepart)
-    {
+    public function setDateDepart($dateDepart) {
         $this->dateDepart = $dateDepart;
-    
+
         return $this;
     }
 
@@ -154,8 +161,7 @@ class Annonce
      *
      * @return \DateTime 
      */
-    public function getDateDepart()
-    {
+    public function getDateDepart() {
         return $this->dateDepart;
     }
 
@@ -165,10 +171,9 @@ class Annonce
      * @param integer $statut
      * @return Annonce
      */
-    public function setStatut($statut)
-    {
+    public function setStatut($statut) {
         $this->statut = $statut;
-    
+
         return $this;
     }
 
@@ -177,8 +182,7 @@ class Annonce
      *
      * @return integer 
      */
-    public function getStatut()
-    {
+    public function getStatut() {
         return $this->statut;
     }
 
@@ -188,10 +192,9 @@ class Annonce
      * @param integer $type
      * @return Annonce
      */
-    public function setType($type)
-    {
+    public function setType($type) {
         $this->type = $type;
-    
+
         return $this;
     }
 
@@ -200,8 +203,7 @@ class Annonce
      *
      * @return integer 
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->type;
     }
 
@@ -211,10 +213,9 @@ class Annonce
      * @param string $description
      * @return Annonce
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -223,8 +224,7 @@ class Annonce
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -234,10 +234,9 @@ class Annonce
      * @param string $villeDepart
      * @return Annonce
      */
-    public function setVilleDepart($villeDepart)
-    {
+    public function setVilleDepart($villeDepart) {
         $this->villeDepart = $villeDepart;
-    
+
         return $this;
     }
 
@@ -246,8 +245,7 @@ class Annonce
      *
      * @return string 
      */
-    public function getVilleDepart()
-    {
+    public function getVilleDepart() {
         return $this->villeDepart;
     }
 
@@ -257,10 +255,9 @@ class Annonce
      * @param string $villeArrive
      * @return Annonce
      */
-    public function setVilleArrive($villeArrive)
-    {
+    public function setVilleArrive($villeArrive) {
         $this->villeArrive = $villeArrive;
-    
+
         return $this;
     }
 
@@ -269,8 +266,7 @@ class Annonce
      *
      * @return string 
      */
-    public function getVilleArrive()
-    {
+    public function getVilleArrive() {
         return $this->villeArrive;
     }
 
@@ -280,10 +276,9 @@ class Annonce
      * @param integer $poids
      * @return Annonce
      */
-    public function setPoids($poids)
-    {
+    public function setPoids($poids) {
         $this->poids = $poids;
-    
+
         return $this;
     }
 
@@ -292,8 +287,7 @@ class Annonce
      *
      * @return integer 
      */
-    public function getPoids()
-    {
+    public function getPoids() {
         return $this->poids;
     }
 
@@ -303,10 +297,9 @@ class Annonce
      * @param integer $prix
      * @return Annonce
      */
-    public function setPrix($prix)
-    {
+    public function setPrix($prix) {
         $this->prix = $prix;
-    
+
         return $this;
     }
 
@@ -315,9 +308,50 @@ class Annonce
      *
      * @return integer 
      */
-    public function getPrix()
-    {
+    public function getPrix() {
         return $this->prix;
+    }
+
+    /**
+     * Set $typeColis
+     *
+     * @param integer $prix
+     * @return Annonce
+     */
+    public function setTypeColis($typeColis) {
+        $this->typeColis = $typeColis;
+
+        return $this;
+    }
+
+    /**
+     * Get $typeColis
+     *
+     * @return integer 
+     */
+    public function getTypeColis() {
+        return $this->typeColis;
+    }
+
+    /**
+     * Set $typeTransport
+     *
+     * @param integer $prix
+     * @return Annonce
+     */
+    public function setTypeTransport($typeTransport) {
+        $this->typeTransport = $typeTransport;
+
+        return $this;
+    }
+
+    /**
+     * Get $typeTransport
+     *
+     * @return integer 
+     */
+    public function getTypeTransport() {
+        return $this->typeTransport;
     }
 
     /**
@@ -326,10 +360,9 @@ class Annonce
      * @param \Jtc\UserBundle\Entity\User $utilisateur
      * @return Annonce
      */
-    public function setUtilisateur(\Jtc\UserBundle\Entity\User $utilisateur = null)
-    {
+    public function setUtilisateur(\Jtc\UserBundle\Entity\User $utilisateur = null) {
         $this->utilisateur = $utilisateur;
-    
+
         return $this;
     }
 
@@ -338,8 +371,8 @@ class Annonce
      *
      * @return \Jtc\UserBundle\Entity\User 
      */
-    public function getUtilisateur()
-    {
+    public function getUtilisateur() {
         return $this->utilisateur;
     }
+
 }

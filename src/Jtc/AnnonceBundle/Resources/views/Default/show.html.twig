@@ -34,6 +34,7 @@
         <strong>{{ annonce.poids }}</strong> {{ 'jtc.annonce.unite_poids'|trans }}</p>
         {% if annonce.type == annonce_type.voyageur %}
             <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+            <p>{{ 'jtc.annonce.type_transport'|trans }} <strong>{{ annonce.typeTransport |trans }}</strong></p>
         {% endif %}    
         {% if annonce.description != "" %}
             <p>{{ 'jtc.annonce.description'|trans }}</p>

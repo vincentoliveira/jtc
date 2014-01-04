@@ -66,6 +66,22 @@
                     <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
                     <input type="number" class="form-control" id="prix" name="prix" value="{{ old_data.prix|default('') }}" />
                 </div>
+                <div class="form-group col-md-6 voyageur">
+                    <label for="type_transport">{{ 'jtc.create.type_colis'|trans }}</label>
+                    <select id="type_transport" name='type_transport'>
+                        {% for transport in transports %}
+                            <option VALUE={{transport.id}}>{{transport.label |trans}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6 expediteur">
+                     <label for="type_colis"> {{ 'jtc.create.type_colis'|trans }}</label>
+                     <select id="type_colis" name='type_colis'>
+                        {% for c in colis %}
+                            <option VALUE={{c.id}}>{{c.label |trans}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="clearfix"></div>
                 <div class="form-group col-md-12">
                     <label for="description">{{ 'jtc.create.info_complementaires'|trans }}</label>

@@ -13,6 +13,8 @@ jtc:
     date_depart: "Date de départ"
     ville_depart: "Ville de départ"
     ville_arrive: "Ville d'arrivé"
+    type_transport: "Type de transport"
+    type_colis: "Type de colis"
     
     information_colis: "Information sur le colis"
     poids_disponible: "Poids disponible (en kilogramme)" 
@@ -55,6 +57,15 @@ jtc:
   
   expediteurs:
     title: "Trouver des annonces d'expéditeurs"
+   
+  transport:
+    train: "Train"
+    voiture: "Voiture"
+    avion: "Avion"
+
+  colis:
+    documents: "Documents"
+    vetement: "Vêtements"
 
 form:
   error:
