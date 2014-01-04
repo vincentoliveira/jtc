@@ -99,6 +99,8 @@ class AnnonceService {
                 'setVilleDepart' => 'ville_depart',
                 'setVilleArrive' => 'ville_arrive',
                 'setDescription' => 'description',
+                'setTypeColis' => 'type_colis',
+                'setTypeTransport' => 'type_transport',
                 'setPoids' => 'poids',
                 'setPrix' => 'prix',
             );

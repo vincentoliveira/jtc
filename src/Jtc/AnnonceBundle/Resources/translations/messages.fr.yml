@@ -67,7 +67,7 @@ jtc:
 
   colis:
     documents: "Documents"
-    vetement: "Vêtements"
+    vetements: "Vêtements"
 
 form:
   error:

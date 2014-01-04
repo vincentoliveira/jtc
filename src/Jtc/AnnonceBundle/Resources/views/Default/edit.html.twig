@@ -64,14 +64,29 @@
                     <label for="prix">{{ 'jtc.create.prix_kilo'|trans }}</label>
                     <input type="number" class="form-control" id="prix" name="prix" value="{{ annonce.prix }}" />
                 </div>
-                <div class="form-group col-md-6 voyageur">
-                    <label for="type_transport">{{ 'jtc.create.type_transport'|trans }}</label>
-                    <input type="select" class="form-control" id="ville_arrive" name="type_transport" value="{{ old_data.type_transport|default('') }}" />
+                    <label for="type_transport">{{ 'jtc.create.type_colis'|trans }}</label>
+                    <select id="type_transport" name='type_transport'>
+                        {% for transport in transports %}
+                            {% if  transport.id == annonce.typeTransport  %}
+                                <option selected="selected" VALUE={{transport.id}}> {{transport.label |trans}} </option>
+                            {% else %}
+                                 <option VALUE={{transport.id}}> {{transport.label |trans}} </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 </div>
                  {% else %}    
                 <div class="form-group col-md-6 expediteur">
-                    <label for="type_colis">{{ 'jtc.create.type_colis'|trans }}</label>
-                    <input type="text" class="form-control" id="ville_depart" name="type_colis" value="{{ old_data.type_colis|default('') }}" />
+                     <label for="type_colis"> {{ 'jtc.create.type_colis'|trans }}</label>
+                     <select id="type_colis" name='type_colis'>
+                        {% for c in colis %}
+                             {% if  c.id == annonce.typeColis  %}
+                            <option selected="selected" VALUE={{c.id}}>{{c.label |trans}}</option>
+                             {% else %}
+                            <option VALUE={{c.id}}>{{c.label |trans}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 </div>
                 {% endif %}
                 <div class="clearfix"></div>

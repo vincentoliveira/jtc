@@ -62,7 +62,6 @@ class DefaultController extends BaseController
         $postData = $request->request->all();
         if ($request->getMethod() == "POST") {
             $formHandler = $this->get('jtc_annonce.annonce_service');
-            var_dump($postData);
             $isValid = $formHandler->isValid($postData);
             if ($isValid === true) {
                 $utilisateur = $this->getUser();
@@ -160,6 +159,8 @@ class DefaultController extends BaseController
         return array(
             'annonce' => $annonce,
             'errors' => $errors,
+            'transports' => $this->transports,
+            'colis' => $this->colis
         );
     }
     
