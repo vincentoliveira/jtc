@@ -44,6 +44,8 @@ jtc:
     unite_poids: "(kg)"
     unite_prix: "(EUR / kg)"
     description: "Description :"
+    type_transport: "Type de transport :"
+    type_colis: "Type de colis :"
     
     delete_popup_title: "Confirmation de suppression"
     delete_popup: "Etes-vous sûr de vouloir supprimer cette annonce ?"
