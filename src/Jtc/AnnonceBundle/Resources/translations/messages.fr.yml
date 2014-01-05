@@ -55,6 +55,13 @@ jtc:
   
   expediteurs:
     title: "Trouver des annonces d'expéditeurs"
+    
+  liste:
+    expediteurs: "Liste des expéditeurs"
+    voyageurs: "Liste des voyageurs"
+    
+  search:
+    submit: "Rechercher"
 
 form:
   error:

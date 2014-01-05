@@ -1,12 +1,30 @@
-    <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
-            <span class="listVoyageur">
-                {% if annonce.type == annonce_type.voyageur %}
-                    {{ 'jtc.annonce.voyageur'|trans }}
-                {% else %}
-                    {{ 'jtc.annonce.expediteur'|trans }}
-                {% endif %}
-            </span>
-            <span class="big">{{ annonce.dateDepart|date('d/m/Y') }} </span>
-            <span class="fontblue">{{ annonce.villeDepart }} <span class="glyphicon glyphicon-arrow-right"></span> {{ annonce.villeArrive }} </span>
-            {% if annonce.description is not empty %}- <em>{{ annonce.description }}</em>{% endif %}
-    </a>
+<div class="list">
+    <h2>{{ title|trans }}</h2>
+    {% if annonces is not empty %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="icon date">Date</th>
+                    <th class="icon depart">Départ</th>
+                    <th class="icon arrive">Arrivé</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for annonce in annonces %}
+                    <tr>
+                        <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
+                            <td class="{% if annonce.type == annonce_type.voyageur %}voyageur{% else %}expediteur{% endif %}">
+                            </td>
+                            <td>{{ annonce.dateDepart|date('d/m/Y') }}</td>
+                            <td>{{ annonce.villeDepart }}</td>
+                            <td>{{ annonce.villeArrive }}</td>
+                        </a>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p><em>Aucune annonce</em></p>
+    {% endif %}
+</div>
