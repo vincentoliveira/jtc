@@ -5,4 +5,9 @@ $(document).ready(function(){
          minDate: date,
          dateFormat: 'dd/mm/yy'
     });
+    
+    $('.annonces .link').click(function(e){
+        e.preventDefault();
+        window.location = $(this).attr('href'); 
+    });
 });

@@ -1,7 +1,7 @@
 <div class="list">
     <h2>{{ title|trans }}</h2>
     {% if annonces is not empty %}
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover annonces">
             <thead>
                 <tr>
                     <th></th>
@@ -12,14 +12,12 @@
             </thead>
             <tbody>
                 {% for annonce in annonces %}
-                    <tr>
-                        <a href="{{path('jtc_annonce_show', {id:annonce.id})}}">
-                            <td class="{% if annonce.type == annonce_type.voyageur %}voyageur{% else %}expediteur{% endif %}">
-                            </td>
-                            <td>{{ annonce.dateDepart|date('d/m/Y') }}</td>
-                            <td>{{ annonce.villeDepart }}</td>
-                            <td>{{ annonce.villeArrive }}</td>
-                        </a>
+                    <tr class="link" href="{{path('jtc_annonce_show', {id:annonce.id})}}">
+                        <td class="{% if annonce.type == annonce_type.voyageur %}voyageur{% else %}expediteur{% endif %}">
+                        </td>
+                        <td>{{ annonce.dateDepart|date('d/m/Y') }}</td>
+                        <td>{{ annonce.villeDepart }}</td>
+                        <td>{{ annonce.villeArrive }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -12,12 +12,6 @@ use Jtc\AnnonceBundle\Form\AnnonceContactType;
 
 class DefaultController extends BaseController
 {
-    /**
-     * Homepage
-     * 
-     * @Template
-     */
-    
     public $transports = array(
         1 => array('id' => 1, 'label' => 'jtc.transport.voiture'),
         2 => array('id' => 2, 'label' => 'jtc.transport.train'),
@@ -29,6 +23,11 @@ class DefaultController extends BaseController
         2 => array('id' => 2, 'label' => 'jtc.colis.vetements')
     );
       
+    /**
+     * Homepage
+     * 
+     * @Template
+     */
     public function indexAction()
     {
         $session = $this->getRequest()->getSession();

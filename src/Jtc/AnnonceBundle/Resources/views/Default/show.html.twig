@@ -36,7 +36,7 @@
             <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
             <p>{{ 'jtc.annonce.type_transport'|trans }} <strong>{{ transports[annonce.typeTransport].label |trans }}</strong></p>
         {% else %}
-            <p>{{ 'jtc.annonce.type_colis'|trans }} <strong>{{ colis[annonce.typeColis].label |trans }}</strong></p>
+            {#<p>{{ 'jtc.annonce.type_colis'|trans }} <strong>{{ colis[annonce.typeColis].label |trans }}</strong></p>#}
         {% endif %}    
         {% if annonce.description != "" %}
             <p>{{ 'jtc.annonce.description'|trans }}</p>

@@ -1,3 +1,5 @@
+body{color:#003A5F;}
+
 .error{color:red;}
 .blue                   { background: #3c5a98; }
 .blue:hover		{ background: #4c6aa8; }
@@ -12,11 +14,14 @@
 .navbar-brand img{height:100px;width:130px;}
 .navbar-nav{margin: 80px 0 0;}
 .navbar-nav > li{margin: 0 10px;}
+.navbar-default .navbar-nav > li > a{color:#003A5F;}
+.navbar .navbar-nav>.active>a {background-color: #A6CE39;border-radius: 5px 5px 0px 0px;color:#003A5F;}
 
 .nav-ajouter{background: url('../images/icons/ajouter.png') no-repeat left 50%;padding-left: 30px !important;}
 .nav-voyageur{background: url('../images/icons/voyageur.png') no-repeat left 50%;padding-left: 30px !important;}
 .nav-expediteur{background: url('../images/icons/expediteur.png') no-repeat left 50%;padding-left: 40px !important;}
 
+.list h2{background:#003A5F;color:#A6CE39;border-radius: 4px;padding: 5px; font-size:20px;}
 .list .table{width:auto;}
 .list .icon{padding-top: 40px;text-align: left;}
 .list .date {background: url('../images/icons/date.png') no-repeat 5px top}
@@ -24,3 +29,4 @@
 .list .arrive {width:300px;background: url('../images/icons/arrive.png') no-repeat 5px top}
 .list .voyageur{width:48px;height:32px;background: url('../images/icons/voyageur.png') no-repeat 50% 50%}
 .list .expediteur{width:48px;height:32px;background: url('../images/icons/expediteur.png') no-repeat 50% 50%}
+.list .link:hover{cursor:pointer;}
