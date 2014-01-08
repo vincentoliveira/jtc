@@ -35,14 +35,18 @@ class AnnonceRepository extends EntityRepository {
      * @return array
      */
     public function getLeavingToday() {
-        $today = date("Y-m-d");
-        $qb = $this->createQueryBuilder('a');
-        $qb->where('a.dateDepart = :today')
-                ->setParameter('today', $today);
-        $qb->setMaxResults('10');
-        $qb->add('orderBy', 'a.dateDepart DESC');
+        $now = new \DateTime();
+        $now2 = new \DateTime();
+        $datePivot = $now->setTime(0, 0);
+        $datePivot2 = $now2->setTime(23, 59, 59);
 
-        return $qb->getQuery()->getResult();
+        $queryBuilder = $this->createQueryBuilder('annonce');
+        $queryBuilder->select('annonce')
+            ->where('annonce.dateDepart BETWEEN :datePivot AND :datePivot2')
+            ->setParameter(':datePivot', $datePivot)
+            ->setParameter(':datePivot2', $datePivot2);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
