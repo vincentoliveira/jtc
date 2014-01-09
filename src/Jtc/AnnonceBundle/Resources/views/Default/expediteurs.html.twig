@@ -43,18 +43,7 @@
 
         <button type="submit" id="submit" class="btn btn-success">{{ 'jtc.search.submit'|trans }}</button><br /><br />
     </form>
-    <div class="panel panel-default expediteur">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'jtc.liste.expediteurs'|trans }}</h3>
-        </div>
-        <ul class="dropotron">
-                {% for annonce in annonces %}
-                <li style="white-space: nowrap;">{% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'annonce': annonce} %}</li>
-                {% else %}
-                <li style="white-space: nowrap;">{{ 'jtc.mes_annonce.aucune_annonce'|trans }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
+    
+    {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'title':'jtc.liste.expediteurs', 'annonces': annonces} %}
 
 {% endblock %}

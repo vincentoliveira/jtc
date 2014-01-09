@@ -68,6 +68,13 @@ jtc:
   colis:
     documents: "Documents"
     vetements: "Vêtements"
+    
+  liste:
+    expediteurs: "Liste des expéditeurs"
+    voyageurs: "Liste des voyageurs"
+    
+  search:
+    submit: "Rechercher"
 
 form:
   error:
