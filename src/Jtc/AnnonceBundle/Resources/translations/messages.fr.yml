@@ -4,7 +4,7 @@
 jtc:
   create:
     title: "Ajouter votre annonce"
-    type_annonce: "Quelle type d'annonce voulez-vous créé ?"
+    type_annonce: "Quelle type d'annonce voulez-vous créer ?"
     voyageur_description: "Vous êtes un <strong>voyageur</strong> et vous recherchez un colis à transporter"
     expediteur_description: "Vous êtes un <strong>expéditeur</strong> et vous possèdez un colis à transporter"
     submit: "Créé une annonce"
@@ -12,7 +12,7 @@ jtc:
     information_voyage: "Information sur le voyage"
     date_depart: "Date de départ"
     ville_depart: "Ville de départ"
-    ville_arrive: "Ville d'arrivé"
+    ville_arrive: "Ville d'arrivée"
     type_transport: "Type de transport"
     type_colis: "Type de colis"
     

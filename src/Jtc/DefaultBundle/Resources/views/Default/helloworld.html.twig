@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Zecolis{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        {% block meta %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+
+        {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
+    </head>
+    <body>
+        
+        <div class="container" style="max-width: 950px;">
+            <br>
+            <div class="centrage">
+                    <a href="{{ path('jtc_presentation') }}"><img src="{{ asset('images/logo.png') }}" title="{{ 'menu.title'|trans }}" /></a>
+            </div>
+            <br/>
+            <div style="width:100%;">
+                <div>
+                    <div class="prez">
+                        Besoin d'envoyer un colis à l'autre bout du monde, vite et à moindre coût ? <span style="font-size:25px"><br/> Zecolis est la solution !</span>
+                    </div>
+                    <div class="prez-image">
+                        <img  style="margin-left: 190px; width: 200px; height: 200px;" src="{{ asset('images/icons/arrive.png') }}" title="{{ 'menu.title'|trans }}" />
+                    </div>
+                </div>
+                <div >
+                    <div class="prez-image"> <img  style="margin-left: 160px; width: 200px; height: 200px;" src="{{ asset('images/icons/poid.png') }}" title="{{ 'menu.title'|trans }}" /> </div>
+                    <div class="prez">
+                        Besoin d'argent de poche pour votre voyage, rapidement et simplement ? <span style="font-size:25px"><br/> Zecolis est la solution !</span>
+                    </div>
+                </div>
+                <div >
+                    <div class="prez">Inscrivez vous, créez votre annonce.<span style="font-size:25px"><br/> Ensemble soyons la solution !</span></div>
+                    <div class="prez-image"> <img  style="margin-left: 180px; width: 200px; height: 200px;" src="{{ asset('images/icons/ajouter.png') }}" title="{{ 'menu.title'|trans }}" /> </div>
+                </div>
+            </div>
+            <div id="video" style="  margin-left: auto; margin-right: auto;">
+                <iframe width="100%" height="500" src="//www.youtube.com/embed/1c9ZffCj6Co" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div  class="form-pres" style="margin-left: 350px; height: 300px; width: 300px">
+                <form action="{{ path('jtc_presentation')}}" method="post" {{ form_enctype(form) }} >
+                            {{ form_errors(form) }}
+                            {{ form_row(form.nom) }}
+                            {{ form_row(form.prenom) }}
+                            {{ form_row(form.email) }}
+                            {{ form_row(form.message) }}
+                <input name="register" value="S'inscrire"  class="btn btn-primary btn-lg btn-block" type="submit" id="register">
+                </form>
+            </div>
+            <br/>
+            <br/>
+            <input name="register" value="S'inscrire"  class="register btn btn-default btn-lg btn-block" type="submit" id="register-submit" tabindex="10">
+        </div>
+
+        {% block content %}{% endblock %}
+
+        <hr/>
+        <footer>
+            <div class="container">
+                <p>{{ 'jtc.copyright'|trans }}</p>
+        </footer>
+
+        {% block javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script>
+    $(document).ready(function(){
+        $('.form-pres').hide();
+        $('#register-submit').click(function(e){
+            e.preventDefault();
+             $('.form-pres').show();
+             $('#register-submit').hide();            
+        })
+    });
+</script>
+        {% endblock %}
+    </body>
+</html>
