@@ -36,4 +36,14 @@ body{color:#003A5F;}
 .prez-image {margin-bottom: 50px; height: 200px; width:50%; float:left}
 .case {width:100%}
 .centrage {margin-top:20px;padding:20px;text-align: center;border: #f5f5f5 1px solid;height: 200px}
-.form-pres {margin-top:20px;padding:20px;text-align: center;border: #f5f5f5 1px solid;;height: 200px}
+.form-pres {
+    margin-left: 300px;
+    position: absolute;
+    width: 400px;
+    display: block;
+    margin-top: 750px;
+    padding: 20px;
+    text-align: center;
+    border: #f5f5f5 1px solid;
+    height: 400px;
+}
