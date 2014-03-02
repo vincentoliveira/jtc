@@ -24,57 +24,61 @@
                     <a href="{{ path('jtc_presentation') }}"><img src="{{ asset('images/logo.png') }}" title="{{ 'menu.title'|trans }}" /></a>
             </div>
             <br/>
-            <div style="width:100%;">
-                <div>
-                    <div class="prez">
+            <div class="row">
+                    <div class="col-md-6 prez">
                         Besoin d'envoyer un colis à l'autre bout du monde, vite et à moindre coût ? <span style="font-size:25px"><br/> Zecolis est la solution !</span>
                     </div>
-                    <div class="prez-image">
-                        <img  style="margin-left: 125px; width: 220px; height: 190px;" src="{{ asset('images/icons/arrive-moy.png') }}" title="{{ 'menu.title'|trans }}" />
+                    <div class="col-md-6">
+                        <img style="margin-left: 20%; width: 220px; height: 190px;" src="{{ asset('images/icons/arrive-moy.png') }}" title="{{ 'menu.title'|trans }}" />
                     </div>
-                </div>
-                <div >
-                    <div class="prez-image"> <img  style="margin-left: 140px; width: 200px; height: 160px;" src="{{ asset('images/icons/valise.png') }}" title="{{ 'menu.title'|trans }}" /> </div>
-                    <div class="prez">
+            </div>
+            <div class="row">
+                    <div class=" col-md-6 prez">
                         Besoin d'argent de poche pour votre voyage, rapidement et simplement ? <span style="font-size:25px"><br/> Zecolis est la solution !</span>
                     </div>
-                </div>
-                <div >
-                    <div class="prez">Inscrivez vous, créez votre annonce.<span style="font-size:25px"><br/> Ensemble soyons la solution !</span></div>
-                    <div class="prez-image"> <img  style="margin-left: 140px; width: 200px; height: 200px;" src="{{ asset('images/icons/solution.png') }}" title="{{ 'menu.title'|trans }}" /> </div>
-                </div>
+                    <div class=" col-md-6"> 
+                        <img  style="mmargin-left: 20%; width: 200px; height: 160px;" src="{{ asset('images/icons/valise.png') }}" title="{{ 'menu.title'|trans }}" />
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-6 prez">Inscrivez vous, créez votre annonce.<span style="font-size:25px"><br/> Ensemble soyons la solution !</span></div>
+                    <div class="col-md-6"> 
+                        <img  style="margin-left: 20%; width: 200px; height: 200px;" src="{{ asset('images/icons/solution.png') }}" title="{{ 'menu.title'|trans }}" /> 
+                    </div>
+                    {% for flashMessage in app.session.flashbag.get('info') %}
+                        <div class="byline">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}        
             </div>
            <!-- <div id="video" style="  margin-left: auto; margin-right: auto;">
                 <iframe width="100%" height="500" src="//www.youtube.com/embed/1c9ZffCj6Co" frameborder="0" allowfullscreen></iframe>
             </div> -->
-           {% for flashMessage in app.session.flashbag.get('info') %}
-            <div class="byline">
-                {{ flashMessage }}
-            </div>
-            {% endfor %}
-            <div  class="form-pres" style="margin-left: 350px; height: 300px; width: 300px">
+           <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 form-pres ">
                 <form action="{{ path('jtc_presentation')}}" method="post" {{ form_enctype(form) }} >
-                            {{ form_errors(form) }} 
-                            {{ form_row(form.nom) }}
-                            {{ form_row(form.prenom) }}
-                            {{ form_row(form.email) }}
-                            {{ form_row(form.message) }}
-                            {{ form_rest(form) }}
-                <input name="register" value="Contactez nous"  class="btn btn-primary btn-lg btn-block" type="submit" id="register">
-                </form>
-            </div>
-            <br/>
-            <br/>
+                                          {{ form_errors(form) }} 
+                                          {{ form_row(form.nom) }}
+                                          {{ form_row(form.prenom) }}
+                                          {{ form_row(form.email) }}
+                                          {{ form_row(form.message) }}
+                                          {{ form_rest(form) }}
+                              <input name="register" value="Contactez nous"  class="btn btn-primary btn-lg btn-block" type="submit" id="register">
+                              </form>
+                </div>
+                <div class="col-md-4"></div>
+          </div>
             <input name="register" value="Contactez nous"  class="register btn btn-default btn-lg btn-block" type="submit" id="register-submit" tabindex="10">
-        </div>
-
+        
         {% block content %}{% endblock %}
-
-        <hr/>
+        <br/>
         <footer>
-            <div class="container">
+        <div class="row">
                 <p>{{ 'jtc.copyright'|trans }}</p>
-        </footer>
+        </div>
+        </footer>        
+        </div>
 
         {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -82,15 +86,15 @@
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         <script>
-    $(document).ready(function(){
-        $('.form-pres').hide();
-        $('#register-submit').click(function(e){
-            e.preventDefault();
-             $('.form-pres').show();
-             $('#register-submit').hide();            
-        })
-    });
-</script>
+            $(document).ready(function(){
+                $('.form-pres').hide();
+                $('#register-submit').click(function(e){
+                    e.preventDefault();
+                     $('.form-pres').show();
+                     $('#register-submit').hide();            
+                })
+            });
+        </script>
         {% endblock %}
     </body>
 </html>

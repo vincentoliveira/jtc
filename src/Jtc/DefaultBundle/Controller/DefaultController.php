@@ -22,7 +22,7 @@ class DefaultController extends BaseController {
      * @Route("/presentation", name="jtc_presentation")
      */
     public function presentationAction() {
-        $emailZecolis = "fabricehouessou@gmail.com";
+        $emailZecolis = "infos@zecolis.com";
         $firstUser = new FirstUser();
         $form = $this->createFormBuilder($firstUser)
                 ->add('nom', 'text', array('label' => 'Nom'))
