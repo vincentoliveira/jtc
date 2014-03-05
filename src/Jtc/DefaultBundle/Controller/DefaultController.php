@@ -53,7 +53,7 @@ class DefaultController extends BaseController {
                 $em->persist($data);
                 $em->flush();
                 // On redirige vers la page de visualisation de l'article nouvellement créé
-                $this->get('session')->getFlashBag()->add('info', 'Message bien envoyé');
+                $this->get('session')->getFlashBag()->add('info', 'Votre message à bien été envoyé');
             }
         }
         return $this->render('JtcDefaultBundle:Default:helloworld.html.twig', array('form' => $form->createView()));
