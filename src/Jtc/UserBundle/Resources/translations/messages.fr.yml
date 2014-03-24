@@ -59,7 +59,7 @@ registration:
         message: |
             Bonjour %username% !
 
-            Vous venez de vous inscrire sur le site <a href="zecolis.com">zecolis.com</a>.
+            Vous venez de vous inscrire sur le site www.zecolis.com.
             Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
 
             Cordialement,

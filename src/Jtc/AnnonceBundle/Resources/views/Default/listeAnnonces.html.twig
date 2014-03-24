@@ -7,7 +7,7 @@
                     <th></th>
                     <th class="icon date">Date</th>
                     <th class="icon depart">Départ</th>
-                    <th class="icon arrive">Arrivé</th>
+                    <th class="icon arrive">Arrivée</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,8 +16,8 @@
                         <td class="{% if annonce.type == annonce_type.voyageur %}voyageur{% else %}expediteur{% endif %}">
                         </td>
                         <td>{{ annonce.dateDepart|date('d/m/Y') }}</td>
-                        <td>{{ annonce.villeDepart }}</td>
-                        <td>{{ annonce.villeArrive }}</td>
+                        <td>{{ annonce.villeDepart | capitalize }}</td>
+                        <td>{{ annonce.villeArrive | capitalize}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
