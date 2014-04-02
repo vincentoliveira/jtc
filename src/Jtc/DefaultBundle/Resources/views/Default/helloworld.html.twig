@@ -12,13 +12,14 @@
         <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/s-buttons.css') }}" rel="stylesheet">
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
     </head>
     <body style="background-color: #ececec;">
         
-        <div class="container" style="max-width: 950px;background-color: #fff;height:1430px;padding: 0 30px;">
+        <div class="container" style="max-width: 950px;background-color: #fff;height:850px;padding: 0 30px;">
             <br>
             <div>
                     <a href="{{ path('jtc_presentation') }}"><img src="{{ asset('images/logo_small.png') }}" title="{{ 'menu.title'|trans }}" /></a>
@@ -87,14 +88,17 @@
                               </form>
                 </div>
                 <div class="col-md-4"></div>
+                <a href="{{ path('jtc_annonce_homepage') }}"><br/><input name="accés" value="Accédez au site"  class="btn-success btn-default btn-lg btn-block" type="submit" id="home-submit" tabindex="10"></a>
                 <br/><input name="register" value="Contactez nous"  class="register btn btn-default btn-lg btn-block" type="submit" id="register-submit" tabindex="10">
-          </div>
+
+           </div>
         
         {% block content %}{% endblock %}
         <br/>
         <footer>
         <div class="row">
                 <p>{{ 'jtc.copyright'|trans }}</p>
+                <a target="_blank" href="http://facebook.com/pages/Zecolis/634809236560191?ref=stream" class="sb text facebook">Facebook</a>
         </div>
         </footer>        
         </div>
