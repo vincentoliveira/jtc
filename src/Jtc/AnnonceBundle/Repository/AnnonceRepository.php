@@ -21,6 +21,7 @@ class AnnonceRepository extends EntityRepository {
         $qb = $this->createQueryBuilder('a');
         if ($type !== null) {
             $qb->where('a.type = :type')->setParameter('type', $type);
+            $qb->andWhere('a.utilisateur IS NOT NULL');
         }
         if ($limit !== null) {
             $qb->setMaxResults($limit);
