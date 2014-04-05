@@ -19,10 +19,10 @@ class AnnonceRepository extends EntityRepository {
      */
     public function getLastAnnonce($type = null, $limit = null) {
         $qb = $this->createQueryBuilder('a');
-        if ($type != null) {
+        if ($type !== null) {
             $qb->where('a.type = :type')->setParameter('type', $type);
         }
-        if ($limit != null) {
+        if ($limit !== null) {
             $qb->setMaxResults($limit);
         }
 
