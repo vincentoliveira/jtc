@@ -21,6 +21,9 @@
                 <li>
                     <a class="nav-expediteur" href="{{ path('jtc_annonce_expediteurs') }}">{{ 'menu.expediteurs'|trans }}</a>
                 </li>
+                <li>
+                    <a class="nav-document" href="{{ path('jtc_annonce_documents') }}"> !! {{ 'menu.documents'|trans }}</a>
+                </li>
                 {% if is_granted("ROLE_USER") %}
                 <li {% if 'jtc_annonce_mes_annonces' in breadcrumb %}class="active"{% endif %}>
                     <a href="{{ path('jtc_annonce_mes_annonces') }}">{{ 'menu.mes_annonce'|trans }}</a>
