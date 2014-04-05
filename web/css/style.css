@@ -20,7 +20,7 @@ body{color:#003A5F;}
 .nav-ajouter{background: url('../images/icons/ajouter.png') no-repeat left 50%;padding-left: 30px !important;}
 .nav-voyageur{background: url('../images/icons/voyageur.png') no-repeat left 50%;padding-left: 30px !important;}
 .nav-expediteur{background: url('../images/icons/expediteur.png') no-repeat left 50%;padding-left: 40px !important;}
-.nav-document{background: no-repeat left 50%;padding-left: 40px !important;}
+.nav-document{background: no-repeat left 50%; color : red !important;}
 
 .list{margin-bottom: 50px;}
 .list h2{background:#003A5F;color:#A6CE39;border-radius: 4px;padding: 5px; font-size:20px;}

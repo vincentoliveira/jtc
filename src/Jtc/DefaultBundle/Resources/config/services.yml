@@ -6,3 +6,16 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: twig.extension}
+    
+    jtc.socialBarHelper:
+        class : Jtc\DefaultBundle\Templating\Helper\SocialBarHelper
+        arguments : [ "@templating" ]
+        tags : 
+            - {name : "templating.helper", alias : "social-buttons"} 
+   
+    twig.extension.jtc_social_bar:
+        class: Jtc\DefaultBundle\TwigExtension\JtcTwigSocialBar
+        arguments : [ "@service_container" ] 
+        tags:
+            - { name: "twig.extension" }
+   
