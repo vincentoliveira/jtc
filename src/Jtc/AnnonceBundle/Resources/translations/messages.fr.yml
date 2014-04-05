@@ -59,7 +59,11 @@ jtc:
   
   expediteurs:
     title: "Trouver des annonces d'expéditeurs"
-   
+    
+  documents:
+    title: "Déclaration du contenu"
+    content: "Nous recommandons fortement que pour chaque transactions les deux parties remplissent le document ci-joint"
+
   transport:
     train: "Train"
     voiture: "Voiture"

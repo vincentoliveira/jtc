@@ -9,6 +9,8 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Jtc\AnnonceBundle\Entity\Annonce;
 use Jtc\AnnonceBundle\Form\AnnonceContactType;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class DefaultController extends BaseController
 {
@@ -243,6 +245,26 @@ class DefaultController extends BaseController
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $annonces = $repo->getLastAnnonce($globals['annonce_type']['expediteur']);
         return array('annonces' => $annonces);
+    }
+    
+    /**
+     * Liste des annonces 'expediteur'
+     * 
+     * @Template()
+     */
+    public function documentsAction() 
+    {
+        $request = $this->container->get('request');
+        $fichier = "attestation.pdf";
+        $chemin = "../web/doc/"; // emplacement de votre fichier .pdf
+        if ($request->getMethod() == 'POST') {
+            $response = new Response();
+            $response->setContent(file_get_contents($chemin . $fichier));
+            $response->headers->set('Content-Type', 'application/force-download'); // modification du content-type pour forcer le téléchargement (sinon le navigateur internet essaie d'afficher le document)
+            $response->headers->set('Content-disposition', 'filename=' . $fichier);
+            return $response;
+        }
+        return array('urlDoc' => $chemin);
     }
     
     /**

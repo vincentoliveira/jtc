@@ -11,6 +11,7 @@ menu:
   chercher_annonce: "Chercher une annonce"
   expediteurs: "Les expéditeurs"
   voyageurs: "Les voyageurs"
+  documents: "Document"
   mes_annonce: "Mes annonces"
   bonjour_utilisateur: "Bonjour <strong>%utilisateur%</strong>"
   connexion: "Connexion"
