@@ -46,7 +46,7 @@ class AnnonceRepository extends EntityRepository {
             ->where('annonce.dateDepart BETWEEN :datePivot AND :datePivot2')
             ->setParameter(':datePivot', $datePivot)
             ->setParameter(':datePivot2', $datePivot2);
-
+        $queryBuilder->andWhere('annonce.utilisateur IS NOT NULL');
         return $queryBuilder->getQuery()->getResult();
     }
 
