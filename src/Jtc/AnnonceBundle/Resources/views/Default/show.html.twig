@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="container">
-    {{ facebookButton( {'locale':'fr_FR', 'send':true} ) }}<br/>
-    {{ twitterButton({'locale':'fr_FR'}) }}<br/>
-    {{ googlePlusButton( {'locale':'fr', 'url':'http://google.fr' }) }}<br/>
+    {{ facebookButton( {'locale':'fr_FR', 'send':true} ) }}<br/><br/>
+    {{ twitterButton({'locale':'fr_FR'}) }}<br/><br/>
+    {{ googlePlusButton( {'locale':'fr', 'url':'http://google.fr' }) }}<br/><br/>
     
     {% for flashMessage in app.session.flashbag.get('info') %}
         <div class="byline">
