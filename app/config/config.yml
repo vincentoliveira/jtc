@@ -33,6 +33,7 @@ parameters:
             fos_user_resetting_check_email: ~
             fos_user_resetting_reset: ~
 
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }

@@ -35,3 +35,5 @@ _security_check:
     pattern:  /login_facebook_check
 _security_logout:
     pattern:  /logout
+fos_facebook_channel:
+    resource: "@FOSFacebookBundle/Resources/config/routing.xml"
