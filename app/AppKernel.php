@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             
             new FOS\UserBundle\FOSUserBundle(),
-            
+            new FOS\FacebookBundle\FOSFacebookBundle(),
             new Jtc\DefaultBundle\JtcDefaultBundle(),
             new Jtc\AnnonceBundle\JtcAnnonceBundle(),
             new Jtc\UserBundle\JtcUserBundle(),

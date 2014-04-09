@@ -9,6 +9,8 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
+        my_facebook_provider:
+          id: my_user.facebook_provider # Notre provider, nous y viendrons par la suite.
 
     firewalls:
         main:
@@ -18,6 +20,15 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            logout:
+                path: /logout
+
+            
+            fos_facebook:
+                app_url: "%api_facebook_name%"
+                server_url: "%api_facebook_server%"
+                check_path: /login_facebook_check   # Pour éviter toute confusion avec le formulaire de base, j'ai spécifié une route pour Facebook
+                provider: my_facebook_provider
 
     access_control:
         - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
