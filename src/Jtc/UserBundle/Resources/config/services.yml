@@ -1,6 +1,5 @@
 parameters:
 #    jtc_user.example.class: Jtc\UserBundle\Example
-    my_user.facebook_provider : Jtc\UserBundle\Security\User\Provider\FacebookProvider
 
 services:
     jtc_user.registration.form.type:
@@ -14,11 +13,10 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: jtc_profile }
-
-    my_user.facebook_provider:
-        class : "%my_user.facebook_provider%"
+            
+    my.facebook.user:
+        class: Jtc\UserBundle\Security\User\Provider\FacebookProvider
         arguments:
             facebook: "@fos_facebook.api"
             userManager: "@fos_user.user_manager"
             validator: "@validator"
-            container: "@service_container"

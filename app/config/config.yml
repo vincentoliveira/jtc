@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     
 parameters:
+    fos_facebook.channel.expire: 31536000 #60*60*24*365
+    
     annonce.type:
         voyageur: 0
         expediteur: 1

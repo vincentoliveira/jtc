@@ -31,9 +31,14 @@ fos_user_change_password:
     prefix: /profile
 
 # FosFB routing
-_security_check:
-    pattern:  /login_facebook_check
 _security_logout:
     pattern:  /logout
+    
+_security_login:
+    pattern: /loginfb
+
+_security_check:
+    pattern: /loginfb_check
+  
 fos_facebook_channel:
     resource: "@FOSFacebookBundle/Resources/config/routing.xml"

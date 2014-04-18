@@ -46,16 +46,16 @@
         {{ facebook_initialize({'xfbml': true, 'culture': 'fr_FR', 'fbAsyncInit': 'onFbInit();'}) }}
         <script type="text/javascript" > // Script for FOSFacebookBundle
         function goLogIn(){
-            window.location = "{{ path('_security_check') }}";
+            window.location.href = "{{ path('_security_check') }}";
         }
- 
+
         function onFbInit() {
-            if (typeof(FB) != 'undefined' && FB != null ) {
+            if (typeof(FB) != 'undefined' && FB != null ) {              
                 FB.Event.subscribe('auth.statusChange', function(response) {
                     if (response.session || response.authResponse) {
-                        setTimeout(goLogIn, 50);
+                        setTimeout(goLogIn, 500);
                     } else {
-                        window.location = "{{ path('_security_logout') }}";
+                        window.location.href = "{{ path('_security_logout') }}";
                     }
                 });
             }
