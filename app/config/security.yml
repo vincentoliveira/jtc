@@ -29,8 +29,8 @@ security:
             fos_facebook:
                 app_url: "%api_facebook_name%"
                 server_url: "%api_facebook_server%"
-                login_path: _security_login
-                check_path: _security_check
+                login_path: /login
+                check_path: /login_check
                 provider: my_fos_facebook_provider
                 default_target_path: /
 
