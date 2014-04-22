@@ -7,8 +7,13 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
+        chain_provider:
+            chain:
+                providers: [fos_userbundle, my_fos_facebook_provider]
         fos_userbundle:
             id: fos_user.user_provider.username_email
+        my_fos_facebook_provider:
+            id: my.facebook.user
 
     firewalls:
         main:
@@ -18,6 +23,16 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            logout:
+                path: /logout
+            
+            fos_facebook:
+                app_url: "%api_facebook_name%"
+                server_url: "%api_facebook_server%"
+                login_path: _security_login
+                check_path: _security_check
+                provider: my_fos_facebook_provider
+                default_target_path: /
 
     access_control:
         - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }

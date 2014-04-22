@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     
 parameters:
+    fos_facebook.channel.expire: 31536000 #60*60*24*365
+    
     annonce.type:
         voyageur: 0
         expediteur: 1
@@ -32,6 +34,7 @@ parameters:
             fos_user_resetting_send_email: ~
             fos_user_resetting_check_email: ~
             fos_user_resetting_reset: ~
+
 
 framework:
     #esi:             ~
@@ -121,3 +124,10 @@ fos_user:
         form:
             type: jtc_profile
 
+# app/config/config.yml
+fos_facebook:
+    alias:  facebook
+    app_id: %api_facebook_id%
+    secret: %api_facebook_secret%
+    cookie: true
+    permissions: [email, user_birthday, user_location, read_friendlists]

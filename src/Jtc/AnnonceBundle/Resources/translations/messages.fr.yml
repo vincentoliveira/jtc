@@ -7,7 +7,7 @@ jtc:
     type_annonce: "Quelle type d'annonce voulez-vous créer ?"
     voyageur_description: "Vous êtes un <strong>voyageur</strong> et vous recherchez un colis à transporter"
     expediteur_description: "Vous êtes un <strong>expéditeur</strong> et vous possèdez un colis à transporter"
-    submit: "Créé une annonce"
+    submit: "Créer une annonce"
     
     information_voyage: "Information sur le voyage"
     date_depart: "Date de départ"
