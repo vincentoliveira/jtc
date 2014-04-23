@@ -24,9 +24,6 @@
                 <li {% if 'jtc_annonce_documents' in breadcrumb %}class= "active" {% endif %}>
                     <a class="nav-document" href="{{ path('jtc_annonce_documents') }}"> {{ 'menu.documents'|trans }}</a>
                 </li>
-                <li >
-                     {{ facebook_login_button({'autologoutlink': false}) }}
-                </li>
                 {% if is_granted("ROLE_USER") %}
                 <li {% if 'jtc_annonce_mes_annonces' in breadcrumb %}class="active"{% endif %}>
                     <a href="{{ path('jtc_annonce_mes_annonces') }}">{{ 'menu.mes_annonce'|trans }}</a>
