@@ -174,3 +174,43 @@ ls
 rm -rf app/cache/*
 sudo rm -rf app/cache/*
 ls
+ls
+git branch -a
+git pull
+sudo -u data-www git pull
+ls -l
+sudo -u www-data git pull
+git checkout develop
+git status
+cat #src/Jtc/UserBundle/Security/
+cat src/Jtc/UserBundle/Security/
+cat src/Jtc/UserBundle/Security/User/Provider/FacebookProvider.php 
+git diff src/Jtc/UserBundle/Security/User/Provider/FacebookProvider.php 
+git status
+git add .
+sudo -u www-data git add . 
+sudo -u www-data git commit -am"provider"
+sudo -u www-data git commit -ma"provider"
+ls
+git checkout develop
+git pull
+sudo -u www-data git pull
+git status
+cat src/Jtc/DefaultBundle/Resources/views/layout.html.twig
+git checkout  src/Jtc/DefaultBundle/Resources/views/layout.html.twig
+git status
+git diff src/Jtc/DefaultBundle/Resources/views/layout.html.twig
+sudo -u www-data git -am"modif"
+sudo -u www-data git -ma"modif"
+sudo -u www-data git commit -am"modif"
+sudo -u www-data git commit -ma"modif"
+git status
+git status
+git branch -a
+sudo -u www-data git pull
+git diff src/Jtc/DefaultBundle/Resources/views/layout.html.twig
+cat src/Jtc/DefaultBundle/Resources/views/layout.html.twig
+php app/console assets:install
+rm -rf app/cache/*
+sudo -u www-data rm -rf app/cache/*
+php app/console assets:install
