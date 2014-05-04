@@ -7,20 +7,30 @@ use Jtc\DefaultBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Jtc\DefaultBundle\Entity\FirstUser;
 
-class DefaultController extends BaseController {
-
+class DefaultController extends BaseController 
+{
     /**
-     * Test page
+     * FAQ
      * 
-     * @Template
+     *  @Route("/faq", name="jtc_faq")
      */
-    public function testAction() {
-        return $this->render('JtcDefaultBundle:Default:test.html.twig');
+    public function faqAction() {
+        return $this->render('JtcDefaultBundle:Default:faq.html.twig');
     }
-
+    
+        /**
+     * FAQ
+     * 
+     *  @Route("/a-propos", name="jtc_propos")
+     */
+    public function proposAction() {
+        return $this->render('JtcDefaultBundle:Default:apropos.html.twig');
+    }
+    
     /**
      * @Route("/presentation", name="jtc_presentation")
      */
+    
     public function presentationAction() {
         $emailZecolis = "infos@zecolis.com";
         $firstUser = new FirstUser();

@@ -1,82 +1,54 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}Zecolis{% endblock %}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        {% block meta %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% endblock %}
+       {% extends "JtcDefaultBundle::layout.html.twig" %}
 
-        {% block stylesheets %}
-        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/s-buttons.css') }}" rel="stylesheet">
-        {% endblock %}
+       {% block content %}
+<div class="container" style="max-width: 950px;background-color: #fff;height:850px;padding: 0 30px;">
+    <div class="row rzcolis">
+        <div class="col-md-6 prez">
+            Vous aussi vous avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
+                du mal à envoyer vos colis</span> vers l'Afrique, l'Amérique latine vers l'Europe, ou l'Amérique!!
+            Et Vous avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
+                marre de chercher</span>  dans votre entourage une personne à qui confiez vos colis!!
+        </div>
+        <div class="col-md-6">
+            <img src="{{ asset('images/icons/arrive-moy.png') }}" title="{{ 'menu.title'|trans }}" />
+        </div>
+    </div>
 
-        <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
-    </head>
-    <body style="background-color: #ececec;">
-        
-        <div class="container" style="max-width: 950px;background-color: #fff;height:850px;padding: 0 30px;">
-            <br>
-            <div>
-                    <a href="{{ path('jtc_presentation') }}"><img src="{{ asset('images/logo_small.png') }}" title="{{ 'menu.title'|trans }}" /></a>
-                    <span style="color: #6cac23; font-size: 30px; margin: 0 0 0 20px; line-height: 80px;">
-                        Zecolis
-                    </span>
-                    <br/><span style="color: #777777;font-style:italic;margin: 0 0 0 150px;">Votre colis demain en main</span>
-                    
-            </div>
-            <br/>
-            <div class="row rzcolis">
-                    <div class="col-md-6 prez">
-                        Vous aussi vous avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
-                            du mal à envoyer vos colis</span> vers l'Afrique, l'Amérique latine vers l'Europe, ou l'Amérique!!
-                        Et Vous avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
-                            marre de chercher</span>  dans votre entourage une personne à qui confiez vos colis!!
-                    </div>
-                    <div class="col-md-6">
-                        <img src="{{ asset('images/icons/arrive-moy.png') }}" title="{{ 'menu.title'|trans }}" />
-                    </div>
-            </div>
-
-            <div class="row rzcolis">
-                    <div class="col-md-6 prez">
-                        Finalement vous payez cher des sociétés qui délivrent après 3 jours vos colis. 
-                        Dites stop. Et rejoignez zecolis. Passez votre annonce pour trouver un voyageur qui délivrera votre colis. 
-                        Plus <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;">
-                            SIMPLE</span> plus <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
-                                RAPIDE </span> Zecolis vous met en contact <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;">
-                                    GRATUITEMENT</span>
-                    </div>
-                    <div class="col-md-6"> 
-                        <img src="{{ asset('images/icons/valise.png') }}" title="{{ 'menu.title'|trans }}" /> 
-                    </div>      
-            </div>
-            <div class="row rzcolis">
-                    <div class="col-md-6 prez">
-                        Vous voyagez et avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> des kilos de libres </span>  dans vos valises ? Ne perdez pas de temps.
-                        <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> Inscrivez vous </span> , 
-                            créez votre annonce sur 
-                            <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> Zecolis </span> 
-                    </div>
-                    <div class="col-md-6">
-                        <img src="{{ asset('images/icons/solution.png') }}" title="{{ 'menu.title'|trans }}" />
-                    </div>
-            </div>
-           <!-- <div id="video" style="  margin-left: auto; margin-right: auto;">
-                <iframe width="100%" height="500" src="//www.youtube.com/embed/1c9ZffCj6Co" frameborder="0" allowfullscreen></iframe>
-            </div> -->
+    <div class="row rzcolis">
+        <div class="col-md-6 prez">
+            Finalement vous payez cher des sociétés qui délivrent après 3 jours vos colis. 
+            Dites stop. Et rejoignez zecolis. Passez votre annonce pour trouver un voyageur qui délivrera votre colis. 
+            Plus <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;">
+                SIMPLE</span> plus <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> 
+                RAPIDE </span> Zecolis vous met en contact <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;">
+                GRATUITEMENT</span>
+        </div>
+        <div class="col-md-6"> 
+            <img src="{{ asset('images/icons/valise.png') }}" title="{{ 'menu.title'|trans }}" /> 
+        </div>      
+    </div>
+    <div class="row rzcolis">
+        <div class="col-md-6 prez">
+            Vous voyagez et avez <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> des kilos de libres </span>  dans vos valises ? Ne perdez pas de temps.
+            <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> Inscrivez vous </span> , 
+            créez votre annonce sur 
+            <span style="font-size: 22px;font-weight: 400;font-style: normal;color: #6cac23;"> Zecolis </span> 
+        </div>
+        <div class="col-md-6">
+            <img src="{{ asset('images/icons/solution.png') }}" title="{{ 'menu.title'|trans }}" />
+        </div>
+    </div>
+    <!-- <div id="video" style="  margin-left: auto; margin-right: auto;">
+         <iframe width="100%" height="500" src="//www.youtube.com/embed/1c9ZffCj6Co" frameborder="0" allowfullscreen></iframe>
+     </div> -->
            {% for flashMessage in app.session.flashbag.get('info') %}
-           <div class="byline">
+    <div class="byline">
                 {{ flashMessage }}
-           </div>
+        </div>
            {% endfor %}  
-           <div class="row formbox">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 form-pres ">
+        <div class="row formbox">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-pres ">
                 <form action="{{ path('jtc_presentation')}}" method="post" {{ form_enctype(form) }} >
                                           {{ form_errors(form) }} 
                                           {{ form_row(form.nom) }}
@@ -84,24 +56,15 @@
                                           {{ form_row(form.email) }}
                                           {{ form_row(form.message) }}
                                           {{ form_rest(form) }}
-                              <input name="register" value="Contactez nous"  class="btn btn-primary btn-lg btn-block" type="submit" id="register">
-                              </form>
+                        <input name="register" value="Contactez nous"  class="btn btn-primary btn-lg btn-block" type="submit" id="register">
+                    </form>
                 </div>
                 <div class="col-md-4"></div>
-                <a href="{{ path('jtc_annonce_homepage') }}"><br/><input name="accés" value="Accédez au site"  class="btn-success btn-default btn-lg btn-block" type="submit" id="home-submit" tabindex="10"></a>
                 <br/><input name="register" value="Contactez nous"  class="register btn btn-default btn-lg btn-block" type="submit" id="register-submit" tabindex="10">
 
-           </div>
-        
-        {% block content %}{% endblock %}
-        <br/>
-        <footer>
-        <div class="row">
-                <p>{{ 'jtc.copyright'|trans }}</p>
-                <a target="_blank" href="http://facebook.com/pages/Zecolis/634809236560191?ref=stream" class="sb text facebook">Facebook</a>
-        </div>
-        </footer>        
-        </div>
+            </div>
+
+        {% endblock %}
 
         {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -125,7 +88,5 @@
                    $('.formbox').hide();
                 });
             });
-        </script>
-        {% endblock %}
-    </body>
-</html>
+            </script>
+{% endblock %}

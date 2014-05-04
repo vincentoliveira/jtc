@@ -46,6 +46,8 @@ class DefaultController extends BaseController
         return array(
             'lastannonce' => $lastAnnonce,
             'todayannonce' => $todayAnnonce,
+            'transports' => $this->transports,
+            'colis' => $this->colis
         );
     }
 
@@ -338,7 +340,9 @@ class DefaultController extends BaseController
                 // On redirige vers la page de visualisation de l'article nouvellement créé
                 $this->get('session')->getFlashBag()->add('info', 'Message bien envoyé');
                 return $this->render('JtcAnnonceBundle:Default:show.html.twig', array(
-                            'annonce' => $annonce
+                            'annonce' => $annonce,
+                            'transports' => $this->transports,
+                            'colis' => $this->colis,
                         ));
             }
         }

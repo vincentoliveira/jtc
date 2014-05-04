@@ -93,5 +93,35 @@ class FacebookProvider implements UserProviderInterface
 
         return $this->loadUserByUsername($user->getFacebookId());
     }
+    
+    public function authenticate(TokenInterface $token)
+    {
+        if (!$this->supports($token)) {
+            return null;
+        }
+
+        $user = $token->getUser();
+        if ($user instanceof UserInterface) {
+            $this->userChecker->checkPostAuth($user);
+
+            $newToken = new FacebookUserToken($this->providerKey, $user, $user->getRoles(), $token->getAccessToken());
+            $newToken->setAttributes($token->getAttributes());
+
+            return $newToken;
+        }
+
+        if (!is_null($token->getAccessToken())) {
+              $this->facebook->setAccessToken($token->getAccessToken());
+        }
+
+        if ($uid = $this->facebook->getUser()) {
+            $newToken = $this->createAuthenticatedToken($uid,$token->getAccessToken());
+            $newToken->setAttributes($token->getAttributes());
+
+            return $newToken;
+        }
+
+        throw new AuthenticationException('The Facebook user could not be retrieved from the session.');
+    }
 
 }

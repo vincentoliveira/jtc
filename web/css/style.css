@@ -29,6 +29,7 @@ body{color:#003A5F;}
 .list .date {background: url('../images/icons/date.png') no-repeat 5px top}
 .list .depart {width:300px;background: url('../images/icons/depart.png') no-repeat 5px top}
 .list .arrive {width:300px;background: url('../images/icons/arrive.png') no-repeat 5px top}
+.list .infos {width:300px;background: url('../images/icons/ajouter.png') no-repeat 5px top}
 .list .voyageur{width:48px;height:32px;background: url('../images/icons/voyageur.png') no-repeat 50% 50%}
 .list .expediteur{width:48px;height:32px;background: url('../images/icons/expediteur.png') no-repeat 50% 50%}
 .list .link:hover{cursor:pointer;}
@@ -48,6 +49,31 @@ body{color:#003A5F;}
 }
 
 button, input, select[multiple], textarea {
-background-image: none;
-width: 100%;
+    background-image: none;
+    width: 100%;
+}
+
+.fieldset-faq {
+    padding: 0.35em 0.625em 0.75em;
+    margin: 0 2px;
+    border: 1px solid #c0c0c0;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.legend-faq {
+    color: #6CAC23;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    font-size: 22px;
+    line-height: inherit;
+    margin-bottom: 0px;
+    padding: 0;
+    border-width: 0;
+}
+
+.fieldset-propos {
+    margin-top: 30px;
+    padding-left: 20%;
 }

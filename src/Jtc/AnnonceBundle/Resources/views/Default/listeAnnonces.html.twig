@@ -8,6 +8,7 @@
                     <th class="icon date">Date</th>
                     <th class="icon depart">Départ</th>
                     <th class="icon arrive">Arrivée</th>
+                    <th class="icon infos">Infos</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +19,14 @@
                         <td>{{ annonce.dateDepart|date('d/m/Y') }}</td>
                         <td>{{ annonce.villeDepart | capitalize }}</td>
                         <td>{{ annonce.villeArrive | capitalize}}</td>
+                        <td>
+                        {% if annonce.type == annonce_type.voyageur %}
+                            <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+                             {{ 'jtc.annonce.type_transport'|trans }} <strong>{{ transports[annonce.typeTransport].label |trans }}</strong></p>
+                        {% else %}
+                            <p>{{ 'jtc.annonce.type_colis'|trans }} <strong>{{ colis[annonce.typeColis].label |trans }}</strong></p>
+                        {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

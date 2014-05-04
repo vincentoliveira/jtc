@@ -34,7 +34,7 @@ class RegistrationController extends BaseController
     public function confirmAction(Request $request, $token)
     {        
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->container->get('fos_user.user_manager');
+       $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->findUserByConfirmationToken($token);
 

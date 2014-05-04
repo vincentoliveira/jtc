@@ -34,7 +34,11 @@
             <div class="container" style="text-align: center">
                 <p style="font-size:10px">{{ 'jtc.caution'|trans }}</p>
                 <p>{{ 'jtc.copyright'|trans }}</p>
-                <a target="_blank" href="http://facebook.com/pages/Zecolis/634809236560191?ref=stream" class="sb text facebook">Facebook</a>       
+                <a target="_blank" href="http://facebook.com/pages/Zecolis/634809236560191?ref=stream" class="sb text facebook">Facebook</a> 
+                <a href="{{ path('jtc_presentation') }}" class="a sb text" />Présentation</a>
+                <a href="{{ path('jtc_propos') }}" class="a sb green text" />A propos</a>
+                <a href="{{ path('jtc_faq') }}" class="a sb red text" />FAQ</a>
+
         </footer>
 
         {% block javascripts %}
