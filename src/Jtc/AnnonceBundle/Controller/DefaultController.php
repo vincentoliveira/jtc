@@ -322,8 +322,13 @@ class DefaultController extends BaseController
                 $message = \Swift_Message::newInstance();
                 $data = $form->getData();
                 $mailContent = $this->render(
-                        'JtcAnnonceBundle:Default:email.html.twig', array('contenu' => $data['contenu'],
-                    'titre' => $data['sujet'], 'email' => $data['email'])
+                        'JtcAnnonceBundle:Default:email.html.twig', 
+                        array('contenu' => $data['contenu'],
+                                'titre' => $data['sujet'], 
+                                'email' => $data['email'],
+                                'nom' => $data['nom'],
+                                'url' => $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()))
+                            )
                 );
                 $formHandler = $this->get('jtc_annonce.annonce_service');
                 $uRepository = $em->getRepository('JtcUserBundle:User');

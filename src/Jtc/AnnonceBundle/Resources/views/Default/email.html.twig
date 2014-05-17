@@ -1,15 +1,36 @@
-{% block content %}
-    <section class="major">
-        <h2> {{titre}}</h2>
-    </section>
-      
-    <section id="intro">
-        <section class="box">
-            <div class="6u">
-                Expéditeur  :   {{email}}
-                Message     :   {{contenu}}
-            </div>
-        </section>
-    </section>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
+    <head>
+        <title>{% block title %}Zecolis{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        {% block meta %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+
+        {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/s-buttons.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
+    </head>
+    <body>
+            <section class="major">
+                <h2> Titre du message : </h2> {{titre}}
+            </section>
   
-{% endblock %}
+            <section id="intro">
+                <section class="box">
+                    <div class="6u">
+                        <h2>L'adresse email de </h2> {{nom}} : {{email}}
+                        <br/>
+                        <h2>Contenu du message :</h2> {{contenu}}
+                        <br/>
+                    </div>
+                </section>
+            </section>
+
+        </body>
+    </html>
