@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Annonce
  *
  * @ORM\Table(name="first_user")
- * @ORM\Entity(repositoryClass="Jtc\AnnonceBundle\Repository\FirstUserRepository")
+ * @ORM\Entity(repositoryClass="Jtc\DefaultBundle\Repository\FirstUserRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class FirstUser {
@@ -50,8 +50,14 @@ class FirstUser {
      */
     private $message;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="livre_dor", type="boolean", length=1000)
+     */
+    private $livredor;
 
-
+    
     /**
      * Get id
      *
@@ -153,4 +159,13 @@ class FirstUser {
     {
         return $this->message;
     }
+    
+    public function getLivredor() {
+        return $this->livredor;
+    }
+
+    public function setLivredor($livredor) {
+        $this->livredor = $livredor;
+    }
+
 }

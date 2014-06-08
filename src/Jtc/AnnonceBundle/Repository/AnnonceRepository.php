@@ -55,7 +55,8 @@ class AnnonceRepository extends EntityRepository {
      * @param type $user
      * @return type
      */
-    public function getAnnoncesFromUser($userId, $statutId = null) {
+    public function getAnnoncesFromUser($userId, $statutId = null) 
+    {
         $qb = $this->createQueryBuilder('a');
         $qb
                 ->where('a.utilisateur = :user')
@@ -71,8 +72,8 @@ class AnnonceRepository extends EntityRepository {
         return $qb->getQuery()->getResult();
     }
 
-    public function doSearch($data) {
-
+    public function doSearch($data) 
+    {
         $qb = $this->createQueryBuilder('a');
         if ($data['date_depart'] != '') {
             $date = date('Y-m-d H:i:s', strtotime($data['date_depart']));
@@ -106,17 +107,16 @@ class AnnonceRepository extends EntityRepository {
                     ->setParameter('type', $data['type']);
         }
 
-        if ($data['type_colis'] != "") {
-            $qb->andWhere('a.type_colis = :type_colis')
+        if (isset($data['type_colis']) and $data['type_colis'] != "") {
+            $qb->andWhere('a.typeColis = :type_colis')
                     ->setParameter('type_colis', $data['type_colis'] );
         }
 
-        if ($data['type_transport']  != "") {
-            $qb->andWhere('a.type_transport = :type_transport')
+        if (isset($data['type_transport']) and  $data['type_transport']  != "") {
+            $qb->andWhere('a.typeTransport = :type_transport')
                     ->setParameter('type_transport', $data['type_transport']);
         }
 
-        $qb->add('orderBy', 'a.dateDepart ASC');
         return $qb;
     }
 

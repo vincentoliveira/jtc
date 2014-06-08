@@ -39,9 +39,9 @@ jtc_annonce_documents:
     defaults: { _controller: JtcAnnonceBundle:Default:documents }
     
 jtc_annonce_search:
-    pattern:  /recherche
+    pattern:  /recherche/{type}/
     defaults: { _controller: JtcAnnonceBundle:Default:search }
-
+    
 jtc_annonce_contact:
     pattern:  /contact/{id}
     defaults: { _controller: JtcAnnonceBundle:Default:contact }

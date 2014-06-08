@@ -17,7 +17,8 @@ jtc:
     type_colis: "Type de colis"
     
     information_colis: "Information sur le colis"
-    poids_disponible: "Poids disponible (en kilogramme)" 
+    poids_disponible: "Poids disponible (en kilogramme)"
+    poids_desire: "Poids désiré (en kilogramme)" 
     poids_du_colis: "Poids du colis (en kilogramme)" 
     prix_kilo: "Prix au kilo (en EUR)"
     info_complementaires: "Information complémentaires"
@@ -79,6 +80,10 @@ jtc:
     
   search:
     submit: "Rechercher"
+  
+  avis:
+    title: "Laissez nous un mot :"
+    liste: "Liste d'avis :"
 
 form:
   error:

@@ -204,7 +204,7 @@ class DefaultController extends BaseController
     {
         return array('annonce' => $annonce,            
             'transports' => $this->transports,
-            'colis' => $this->colis,);
+            'colis' => $this->colis);
     }
 
     /**
@@ -217,8 +217,10 @@ class DefaultController extends BaseController
         $service = $this->get('jtc_annonce.annonce_service');
         $user = $this->getUser();
         $annonces = $service->getAnnoncesFromUser($user->getId());
-        
-        return array('annonces' => $annonces);
+
+        return array('annonces' => $annonces,
+            'transports' => $this->transports,
+            'colis' => $this->colis);
     }
     
     /**
@@ -232,7 +234,9 @@ class DefaultController extends BaseController
         $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $annonces = $repo->getLastAnnonce($globals['annonce_type']['voyageur']);
-        return array('annonces' => $annonces);
+         return array('annonces' => $annonces,            
+            'transports' => $this->transports,
+            'colis' => $this->colis);
     }
     
     /**
@@ -246,7 +250,9 @@ class DefaultController extends BaseController
         $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $annonces = $repo->getLastAnnonce($globals['annonce_type']['expediteur']);
-        return array('annonces' => $annonces);
+        return array('annonces' => $annonces,
+            'transports' => $this->transports,
+            'colis' => $this->colis);
     }
     
     /**
@@ -268,42 +274,47 @@ class DefaultController extends BaseController
         }
         return array('urlDoc' => $chemin);
     }
-    
+        
     /**
      * Recherche des annonces 'expediteur' ou 'voyageur'
      * 
      * @Template()
      */
-    public function searchAction() 
+    public function searchAction($type) 
     {
         $request = $this->container->get('request');
         $postData = $request->request->all();
         $em = $this->getDoctrine()->getManager();
         $aRepository = $em->getRepository('JtcAnnonceBundle:Annonce');
-
-        if (empty($postData)) {
-            // rediriger mais ou ? 
-        }
-
-        if (!empty($postData)) {
-            $type = $postData['type'];
-        }
         $twig = $this->container->get('twig');
         $globals = $twig->getGlobals();
-        
+
         $pageToGoBackTo = ($type == $globals['annonce_type']['voyageur']) ? 'JtcAnnonceBundle:Default:voyageurs.html.twig' : 'JtcAnnonceBundle:Default:expediteurs.html.twig';
+        $postData['type'] = $type;
+
         if ($request->getMethod() == 'POST') {
             $qb = $aRepository->doSearch($postData);
             $annonces = $qb->getQuery()->getResult();
             return $this->container->get('templating')->renderResponse($pageToGoBackTo, array(
-                        'annonces' => $annonces
+                        'annonces' => $annonces,
+                        'transports' => $this->transports,
+                        'colis' => $this->colis
                     ));
         }
         $annonces = $aRepository->getLastAnnonce($type);
-        return $this->render($pageToGoBackTo, array('annonces' => $annonces
+        return $this->container->get('templating')->renderResponse($pageToGoBackTo, array(
+                    'annonces' => $annonces,
+                    'transports' => $this->transports,
+                    'colis' => $this->colis
                 ));
     }
     
+    
+    /**
+     * Methode pour la gestion des contacts 
+     * 
+     * @Template()
+     */
     public function contactAction($id) 
     {
         $em = $this->getDoctrine()->getManager();

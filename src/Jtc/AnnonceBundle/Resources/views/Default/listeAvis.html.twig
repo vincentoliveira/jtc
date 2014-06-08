@@ -1,0 +1,23 @@
+<br/><br/><br/>
+<h2>{{ 'jtc.avis.liste'|trans }}</h2>
+<div class="controls-row">
+    {% if listAvis is not empty %}
+         <table class="table  table-bordered table-striped">
+                {% for avis in listAvis %}
+            <tr class="row">
+                <td style="text-align: center; padding: 40px">
+                    <i class="fa fa-user fa-3x"></i> <strong>{{ avis.nom }} {{ avis.prenom }} </strong>  <br/>
+                    <!-- {{ avis.email }} -->
+                </td>
+                <td style="text-align: center;  padding: 50px">    
+                    {{ avis.message }} 
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+                
+
+    {% else %}
+        <p><em>Aucune annonce</em></p>
+    {% endif %}
+    </div>

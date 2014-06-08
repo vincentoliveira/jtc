@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Jtc\DefaultBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Jtc\DefaultBundle\Entity\FirstUser;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class DefaultController extends BaseController 
 {
@@ -18,8 +19,8 @@ class DefaultController extends BaseController
         return $this->render('JtcDefaultBundle:Default:faq.html.twig');
     }
     
-        /**
-     * FAQ
+     /**
+     * A propos
      * 
      *  @Route("/a-propos", name="jtc_propos")
      */
@@ -28,6 +29,8 @@ class DefaultController extends BaseController
     }
     
     /**
+     * Presentation
+     * 
      * @Route("/presentation", name="jtc_presentation")
      */
     
@@ -47,26 +50,45 @@ class DefaultController extends BaseController
             $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
-                if ($data->getMessage()) {
-                    $mailer = $this->container->get('mailer');
-                    $data = $form->getData();
-                    $message = \Swift_Message::newInstance();
-                    $message->setSubject("Nouveau contact sur Zecolis ")
-                            ->setFrom($data->getEmail())
-                            ->setTo($emailZecolis)
-                            ->setContentType('text/html')
-                            ->setBody($data->getMessage());
-
-                    $mailer->send($message);
-                }
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($data);
-                $em->flush();
-                // On redirige vers la page de visualisation de l'article nouvellement créé
-                $this->get('session')->getFlashBag()->add('info', 'Votre message à bien été envoyé');
+                $contact = $this->get('jtc_default.contact_service');
+                $contact->SendUsMail($data, $emailZecolis);
+                //$this->get('session')->getFlashBag()->add('info', 'Votre messaDSge à bien été envoyé');
             }
         }
         return $this->render('JtcDefaultBundle:Default:helloworld.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * Livre d'or
+     * 
+     * @Route("/livredor", name="jtc_livredor")
+     */
+    
+    public function livreDorAction() {
+        $contact = $this->get('jtc_default.contact_service');
+        $emailZecolis = "infos@zecolis.com";
+        $firstUser = new FirstUser();
+        $form2 = $this->createFormBuilder($firstUser)
+                ->add('nom', 'text', array('label' => 'Nom'))
+                ->add('prenom', 'text', array('label' => 'Prénom'))
+                ->add('email', 'email', array('label' => 'Email'))
+                ->add('message', 'textarea', array('label' => 'Message'))
+                ->getForm();
+
+        $request = $this->container->get('request');
+
+        if ($request->getMethod() == 'POST') {
+            $form2->bind($request);
+            if ($form2->isValid()) {
+                $data = $form2->getData();
+                $contact->SendUsMail($data, $emailZecolis, true);
+                $this->get('session')->getFlashBag()->add('info', 'Votre message à bien été envoyé');
+            }
+        }
+        
+        $listAvis = $contact->getListeAvis();
+        return $this->render('JtcDefaultBundle:Default:livredor.html.twig', array('form' => $form2->createView(),
+                    'listAvis' => $listAvis));
+    }
+    
 }

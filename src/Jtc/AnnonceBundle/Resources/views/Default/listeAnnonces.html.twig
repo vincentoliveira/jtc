@@ -22,9 +22,11 @@
                         <td>
                         {% if annonce.type == annonce_type.voyageur %}
                             <p>{{ 'jtc.annonce.prix'|trans }} <strong>{{ annonce.prix }}</strong> {{ 'jtc.annonce.unite_prix'|trans }}</p>
+                            {{ 'jtc.annonce.poids.voyageur'|trans }} <strong>{{ annonce.poids }}</strong></p>
                              {{ 'jtc.annonce.type_transport'|trans }} <strong>{{ transports[annonce.typeTransport].label |trans }}</strong></p>
                         {% else %}
                             <p>{{ 'jtc.annonce.type_colis'|trans }} <strong>{{ colis[annonce.typeColis].label |trans }}</strong></p>
+                            {{ 'jtc.annonce.poids.expediteur'|trans }} <strong>{{ annonce.poids }}</strong></p>
                         {% endif %}
                         </td>
                     </tr>

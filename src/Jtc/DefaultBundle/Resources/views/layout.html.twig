@@ -13,19 +13,20 @@
         <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/s-buttons.css') }}" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
     </head>
     <body>
         {% include "JtcDefaultBundle::nav_bar.html.twig" %}
-        <div class="container">
+        <!-- <div class="container">
             <ol class="breadcrumb">
                 {% for route in breadcrumb %}
                 <li {% if loop.last %}class="active"{% endif %}><a href="{{ path(route, app.request.attributes.get('_route_params')) }}">{{ ('route.'~route)|trans }}</a></li>
                 {% endfor %}
             </ol>
-        </div>
+        </div> -->
             
         {% block content %}{% endblock %}
             
@@ -36,6 +37,7 @@
                 <p>{{ 'jtc.copyright'|trans }}</p>
                 <a target="_blank" href="http://facebook.com/pages/Zecolis/634809236560191?ref=stream" class="sb text facebook">Facebook</a> 
                 <a href="{{ path('jtc_presentation') }}" class="a sb text" />Présentation</a>
+                <a href="{{ path('jtc_livredor') }}" class="a sb yellow text" />Livre d'or</a>
                 <a href="{{ path('jtc_propos') }}" class="a sb green text" />A propos</a>
                 <a href="{{ path('jtc_faq') }}" class="a sb red text" />FAQ</a>
 
