@@ -57,8 +57,11 @@
                 <button class="btn btn-success" type="submit">Contacter</button>
             </a> 
         {% endif %}
+            <br/> <br/>
+        <div class="fb-comments" data-href="{{ url(app.request.attributes.get('_route') , app.request.attributes.get('_route_params')) }}" data-numposts="5" data-colorscheme="light"></div>
     </div>
 
+    
     <div id="dialog-confirm" title="{{ 'jtc.annonce.delete_popup_title'|trans }}">
       <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>{{ 'jtc.annonce.delete_popup'|trans }}</p>
     </div>
