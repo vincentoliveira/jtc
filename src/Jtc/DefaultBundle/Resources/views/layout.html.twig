@@ -19,6 +19,52 @@
         <link rel="icon" type="image/x-icon" ref="{{ asset('favicon.ico') }}">
     </head>
     <body>
+        
+        {% block javascripts %}
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=757484527616080&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+            <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-39927336-2', 'zecolis.com');
+              ga('require', 'displayfeatures');
+              ga('send', 'pageview');
+                </script>
+                <script src="{{ asset('js/jquery.min.js') }}"></script>
+                <script src="{{ asset('js/jquery-ui.js') }}"></script>
+                <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+                <script src="{{ asset('js/main.js') }}"></script>
+
+        {{ facebook_initialize({'xfbml': true, 'culture': 'fr_FR', 'fbAsyncInit': 'onFbInit();'}) }}
+                <script type="text/javascript" > // Script for FOSFacebookBundle
+                function goLogIn(){
+                    window.location.href = "{{ path('_security_check') }}";
+                }
+
+                function onFbInit() {
+                    if (typeof(FB) != 'undefined' && FB != null ) {              
+                        FB.Event.subscribe('auth.statusChange', function(response) {
+                            if (response.session || response.authResponse) {
+                                setTimeout(goLogIn, 500);
+                            } else {
+                                window.location.href = "{{ path('_security_logout') }}";
+                            }
+                        });
+                    }
+                }
+                    </script>
+        {% endblock %}
+      
         {% include "JtcDefaultBundle::nav_bar.html.twig" %}
         <!-- <div class="container">
             <ol class="breadcrumb">
@@ -39,44 +85,9 @@
                 <a href="{{ path('jtc_presentation') }}" class="a sb text" />Présentation</a>
                 <a href="{{ path('jtc_livredor') }}" class="a sb yellow text" />Livre d'or</a>
                 <a href="{{ path('jtc_propos') }}" class="a sb green text" />A propos</a>
-                <a href="{{ path('jtc_faq') }}" class="a sb red text" />FAQ</a>
-
+                <a href="{{ path('jtc_faq') }}" class="a sb red text" />FAQ</a> <br/>
+<div class="fb-facepile" data-app-id="https://www.facebook.com/pages/Zecolis/634809236560191" data-href="https://www.facebook.com/pages/Zecolis/634809236560191" data-max-rows="1" data-colorscheme="light" data-size="medium" data-show-count="true"></div>
         </footer>
 
-        {% block javascripts %}
-            <script>
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-              ga('create', 'UA-39927336-2', 'zecolis.com');
-              ga('require', 'displayfeatures');
-              ga('send', 'pageview');
-            </script>
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/jquery-ui.js') }}"></script>
-            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('js/main.js') }}"></script>
-
-        {{ facebook_initialize({'xfbml': true, 'culture': 'fr_FR', 'fbAsyncInit': 'onFbInit();'}) }}
-        <script type="text/javascript" > // Script for FOSFacebookBundle
-        function goLogIn(){
-            window.location.href = "{{ path('_security_check') }}";
-        }
-
-        function onFbInit() {
-            if (typeof(FB) != 'undefined' && FB != null ) {              
-                FB.Event.subscribe('auth.statusChange', function(response) {
-                    if (response.session || response.authResponse) {
-                        setTimeout(goLogIn, 500);
-                    } else {
-                        window.location.href = "{{ path('_security_logout') }}";
-                    }
-                });
-            }
-        }
-        </script>
-        {% endblock %}
     </body>
 </html>
