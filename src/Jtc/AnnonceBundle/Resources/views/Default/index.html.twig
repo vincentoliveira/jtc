@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="container">
+    {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'title':'Annonces encore disponibles', 'annonces': lastannonce} %}
     {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'title':'Départs du jour', 'annonces': todayannonce} %}
-    {% include 'JtcAnnonceBundle:Default:listeAnnonces.html.twig' with {'title':'Dernières annonces', 'annonces': lastannonce} %}
 </div>
 
 {% endblock %}

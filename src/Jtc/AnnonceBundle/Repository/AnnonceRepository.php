@@ -27,6 +27,8 @@ class AnnonceRepository extends EntityRepository {
             $qb->setMaxResults($limit);
         }
 
+        $qb->andWhere('a.dateDepart > :today')->setParameter('today', new \DateTime());
+
         $qb->add('orderBy', 'a.dateMaj DESC');
         return $qb->getQuery()->getResult();
     }
