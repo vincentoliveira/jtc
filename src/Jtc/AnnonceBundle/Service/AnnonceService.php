@@ -61,7 +61,7 @@ class AnnonceService {
 
         return empty($errors) ? true : $errors;
     }
-    
+
     /**
      * Add content from form
      * @param array $rowContent
@@ -198,21 +198,20 @@ class AnnonceService {
             return false;
         }
     }
-    
+
     /**
      * Récupère les annonces d'un utilisateurs
      * 
      * @param int $userId
      * @return array
      */
-    public function getAnnoncesFromUser($userId)
-    {
+    public function getAnnoncesFromUser($userId) {
         $statuts = $this->container->getParameter('annonce.status');
         $statutId = $statuts['visible'];
-            
+
         $repo = $this->em->getRepository('JtcAnnonceBundle:Annonce');
         $annonces = $repo->getAnnoncesFromUser($userId, $statutId);
-        
+
         return $annonces;
     }
 
@@ -226,7 +225,7 @@ class AnnonceService {
         return isset($params[$name]) ? $params[$name] : $default;
     }
 
-     /**
+    /**
      * trunate a string
      * @param type $string
      * @param type $max_length
@@ -253,8 +252,36 @@ class AnnonceService {
      * @param string $dateStr
      * @return \DateTime
      */
-    protected function datetimeFromString($dateStr)
-    {
+    protected function datetimeFromString($dateStr) {
         return \DateTime::createFromFormat('d/m/Y', $dateStr);
     }
+
+    /**
+     * Envoi de mail aux admin selon occasion 
+     * 
+     * @Template()
+     */
+    public function sendInfos($id) {
+        $aRepository = $this->em->getRepository('JtcAnnonceBundle:Annonce');
+
+        $annonce = $aRepository->find($id);
+
+        $mailer = $this->container->get('mailer');
+        $message = \Swift_Message::newInstance();
+        $mailContent = $this->container->get('templating')->renderResponse(
+                'JtcAnnonceBundle:Admin:newAnnonce.html.twig', array('contenu' => 'Une nouvelle annonce à été créée',
+                'titre' => 'Nouvelle annonce',
+                'email' => 'infos@zecolis.com',
+                'url' => $this->container->get('router')->generate( 'jtc_annonce_show', array( 'id' => $annonce->getId() ), true ),
+                )
+        );
+        $message->setSubject("Création d'une nouvelle annonce")
+                ->setFrom('infos@zecolis.com')
+                ->setTo(array('fabricehouessou@gmail.com','desouzajean@gmail.com','sadjovi@gmail.com','dkirbyl@yahoo.fr' => 'A name'))
+                ->setContentType('text/html')
+                ->setBody($mailContent);
+
+        $mailer->send($message);
+    }
+
 }

@@ -15,7 +15,8 @@ parameters:
         visible: 1
         supprime: 2
         supprime_admin: 3
-
+    admin.mail: 'fabricehouessou@gmail.com,desouzajean@gmail.com,sadjovi@gmail.com,dkirbyl@yahoo.fr'
+      
     time_to_register_before_annonce: 600
     
     route_tree:
@@ -123,6 +124,9 @@ fos_user:
     profile:
         form:
             type: jtc_profile
+    from_email:
+        address:        webmaster@zecolis.com
+        sender_name:    zecolis
 
 # app/config/config.yml
 fos_facebook:

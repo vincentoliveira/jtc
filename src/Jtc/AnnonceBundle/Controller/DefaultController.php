@@ -76,8 +76,10 @@ class DefaultController extends BaseController
                     if ($utilisateur === null) {
                         return $this->redirectToRoute('jtc_user_register_before_annonce', array('id' => $annonceId));
                     } else {
+                        $formHandler->sendInfos($annonceId);
                         return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonceId));
                     }
+                    
                 }
             } else {
                 $errors = $isValid;
@@ -120,7 +122,7 @@ class DefaultController extends BaseController
         
         $formHandler = $this->get('jtc_annonce.annonce_service');
         $formHandler->completeAnnonce($annonce->getId(), $utilisateur->getId(), $statutId); 
-       
+        $formHandler->sendInfos($annonce->getId());
         return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
     }
     
