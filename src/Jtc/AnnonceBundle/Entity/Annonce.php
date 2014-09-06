@@ -89,6 +89,13 @@ class Annonce {
     /**
      * @var integer
      *
+     * @ORM\Column(name="nb_contact", type="integer", nullable=true)
+     */
+    private $nbContact;
+    
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="prix", type="integer", nullable=true)
      */
     private $prix;
@@ -312,6 +319,27 @@ class Annonce {
         return $this->prix;
     }
 
+        /**
+     * Set nbcontact
+     *
+     * @param integer $nbcontact
+     * @return Annonce
+     */
+    public function setNbContact($nbContact) {
+        $this->nbContact = $nbContact;
+
+        return $this;
+    }
+
+    /**
+     * Get nbcontact
+     *
+     * @return integer 
+     */
+    public function getNbContact() {
+        return intval($this->nbContact);
+    }
+    
     /**
      * Set $typeColis
      *

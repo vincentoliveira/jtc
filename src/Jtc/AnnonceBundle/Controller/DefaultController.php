@@ -11,38 +11,35 @@ use Jtc\AnnonceBundle\Entity\Annonce;
 use Jtc\AnnonceBundle\Form\AnnonceContactType;
 use Symfony\Component\HttpFoundation\Response;
 
+class DefaultController extends BaseController {
 
-class DefaultController extends BaseController
-{
     public $transports = array(
         1 => array('id' => 1, 'label' => 'jtc.transport.voiture'),
         2 => array('id' => 2, 'label' => 'jtc.transport.train'),
         3 => array('id' => 3, 'label' => 'jtc.transport.avion')
     );
-    
     public $colis = array(
         1 => array('id' => 1, 'label' => 'jtc.colis.documents'),
         2 => array('id' => 2, 'label' => 'jtc.colis.vetements')
     );
-      
+
     /**
      * Homepage
      * 
      * @Template
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $session = $this->getRequest()->getSession();
         $drafContentId = $session->get('draf_content_id');
         if (isset($drafContentId)) {
             $session->set('$drafContentId', null);
             return $this->redirectToRoute('jtc_annonce_complete', array('id' => $drafContentId));
         }
-        
+
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $lastAnnonce = $repo->getLastAnnonce(null, 10);
         $todayAnnonce = $repo->getLeavingToday();
-        
+
         return array(
             'lastannonce' => $lastAnnonce,
             'todayannonce' => $todayAnnonce,
@@ -51,14 +48,12 @@ class DefaultController extends BaseController
         );
     }
 
-
     /**
      * Create annonce
      * 
      * @Template
      */
-    public function createAction()
-    {
+    public function createAction() {
         $errors = array();
 
         $request = $this->getRequest();
@@ -79,7 +74,6 @@ class DefaultController extends BaseController
                         $formHandler->sendInfos($annonceId);
                         return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonceId));
                     }
-                    
                 }
             } else {
                 $errors = $isValid;
@@ -93,8 +87,7 @@ class DefaultController extends BaseController
             'colis' => $this->colis,
         );
     }
-    
-    
+
     /**
      * Complete une annonce
      * 
@@ -102,30 +95,29 @@ class DefaultController extends BaseController
      * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
      * @Secure(roles="ROLE_USER")
      */
-    public function completeAction(Annonce $annonce)
-    {
+    public function completeAction(Annonce $annonce) {
         $session = $this->getRequest()->getSession();
         $session->set('$drafContentId', null);
-            
+
         $annonceUtilisateur = $annonce->getUtilisateur();
         $lastUpdate = $annonce->getDateMaj();
         $timeToRegisterBeforeAnnonce = $this->container->getParameter('time_to_register_before_annonce');
         $now = new \DateTime();
-        
+
         if ($annonceUtilisateur !== null || ($now->getTimestamp() - $lastUpdate->getTimestamp()) > $timeToRegisterBeforeAnnonce) {
             return $this->redirectToRoute('fos_user_profile_show');
         }
-        
+
         $statuts = $this->container->getParameter('annonce.status');
         $statutId = $statuts['default'];
         $utilisateur = $this->getUser();
-        
+
         $formHandler = $this->get('jtc_annonce.annonce_service');
-        $formHandler->completeAnnonce($annonce->getId(), $utilisateur->getId(), $statutId); 
+        $formHandler->completeAnnonce($annonce->getId(), $utilisateur->getId(), $statutId);
         $formHandler->sendInfos($annonce->getId());
         return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
     }
-    
+
     /**
      * Edition d'une annonce
      * 
@@ -133,16 +125,15 @@ class DefaultController extends BaseController
      * @Template
      * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
      */
-    public function editAction(Annonce $annonce)
-    {
+    public function editAction(Annonce $annonce) {
         $user = $this->getUser();
-        
+
         if ($user->getId() != $annonce->getUtilisateur()->getId()) {
             return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
         }
-        
+
         $errors = array();
-        
+
         $request = $this->getRequest();
         $postData = $request->request->all();
         if ($request->getMethod() == "POST") {
@@ -160,7 +151,7 @@ class DefaultController extends BaseController
                 $errors = $isValid;
             }
         }
-        
+
         return array(
             'annonce' => $annonce,
             'errors' => $errors,
@@ -168,7 +159,7 @@ class DefaultController extends BaseController
             'colis' => $this->colis
         );
     }
-    
+
     /**
      * Edition d'une annonce
      * 
@@ -176,25 +167,24 @@ class DefaultController extends BaseController
      * @Template
      * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
      */
-    public function deleteAction(Annonce $annonce)
-    {
+    public function deleteAction(Annonce $annonce) {
         $user = $this->getUser();
-        
+
         if ($user->getId() != $annonce->getUtilisateur()->getId()) {
             return $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()));
         }
-        
+
         $statuts = $this->container->getParameter('annonce.status');
         $statut = $statuts['supprime'];
         $annonce->setStatut($statut);
-        
+
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($annonce);
         $em->flush();
-        
+
         return $this->redirectToRoute('jtc_annonce_mes_annonces');
     }
-    
+
     /**
      * Visualisation d'une annonce
      * 
@@ -202,9 +192,8 @@ class DefaultController extends BaseController
      * @Template
      * @ParamConverter("annonce", class="Jtc\AnnonceBundle\Entity\Annonce", options={"id"="id"})
      */
-    public function showAction(Annonce $annonce)
-    {
-        return array('annonce' => $annonce,            
+    public function showAction(Annonce $annonce) {
+        return array('annonce' => $annonce,
             'transports' => $this->transports,
             'colis' => $this->colis);
     }
@@ -214,8 +203,7 @@ class DefaultController extends BaseController
      * 
      * @Template()
      */
-    public function mesAnnoncesAction()
-    {
+    public function mesAnnoncesAction() {
         $service = $this->get('jtc_annonce.annonce_service');
         $user = $this->getUser();
         $annonces = $service->getAnnoncesFromUser($user->getId());
@@ -224,30 +212,28 @@ class DefaultController extends BaseController
             'transports' => $this->transports,
             'colis' => $this->colis);
     }
-    
+
     /**
      * Liste des annonces 'voyageurs'
      * 
      * @Template()
      */
-    public function voyageursAction()
-    {
+    public function voyageursAction() {
         $twig = $this->container->get('twig');
         $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
         $annonces = $repo->getLastAnnonce($globals['annonce_type']['voyageur']);
-         return array('annonces' => $annonces,            
+        return array('annonces' => $annonces,
             'transports' => $this->transports,
             'colis' => $this->colis);
     }
-    
+
     /**
      * Liste des annonces 'expediteur'
      * 
      * @Template()
      */
-    public function expediteursAction()
-    {
+    public function expediteursAction() {
         $twig = $this->container->get('twig');
         $globals = $twig->getGlobals();
         $repo = $this->getRepository('JtcAnnonceBundle:Annonce');
@@ -256,14 +242,13 @@ class DefaultController extends BaseController
             'transports' => $this->transports,
             'colis' => $this->colis);
     }
-    
+
     /**
      * Liste des annonces 'expediteur'
      * 
      * @Template()
      */
-    public function documentsAction() 
-    {
+    public function documentsAction() {
         $request = $this->container->get('request');
         $fichier = "attestation.pdf";
         $chemin = "../web/doc/"; // emplacement de votre fichier .pdf
@@ -276,14 +261,13 @@ class DefaultController extends BaseController
         }
         return array('urlDoc' => $chemin);
     }
-        
+
     /**
      * Recherche des annonces 'expediteur' ou 'voyageur'
      * 
      * @Template()
      */
-    public function searchAction($type) 
-    {
+    public function searchAction($type) {
         $request = $this->container->get('request');
         $postData = $request->request->all();
         $em = $this->getDoctrine()->getManager();
@@ -310,8 +294,7 @@ class DefaultController extends BaseController
                     'colis' => $this->colis
                 ));
     }
-    
-    
+
     /**
      * Methode pour la gestion des contacts 
      * 
@@ -330,39 +313,44 @@ class DefaultController extends BaseController
 
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
-            if ($form->isValid()) {
-                $mailer = $this->container->get('mailer');
-                $message = \Swift_Message::newInstance();
-                $data = $form->getData();
-                $mailContent = $this->render(
-                        'JtcAnnonceBundle:Default:email.html.twig', 
-                        array('contenu' => $data['contenu'],
-                                'titre' => $data['sujet'], 
-                                'email' => $data['email'],
-                                'nom' => $data['nom'],
-                                'url' => $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()))
-                            )
-                );
-                $formHandler = $this->get('jtc_annonce.annonce_service');
-                $uRepository = $em->getRepository('JtcUserBundle:User');
-                $email = $uRepository->find($annonce->getUtilisateur())->getEmail();
-                $sujet = $formHandler->truncate($annonce->getDescription(), 20, '...', true);
-                $message->setSubject("Nouveau message sur votre annonce : " . $sujet)
-                        ->setFrom($data['email'])
-                        ->setTo($email)
-                        ->setContentType('text/html')
-                        ->setBody($mailContent);
+            
+            //incrémenteer le nombre de contact sur l'annonce
+            
+            $annonce->setNbContact($annonce->getNbContact() + 1);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($annonce);
+            $em->flush();
 
-                $mailer->send($message);
+            $mailer = $this->container->get('mailer');
+            $message = \Swift_Message::newInstance();
+            $data = $form->getData();
+            $mailContent = $this->render(
+                    'JtcAnnonceBundle:Default:email.html.twig', array('contenu' => $data['contenu'],
+                'titre' => $data['sujet'],
+                'email' => $data['email'],
+                'nom' => $data['nom'],
+                'url' => $this->redirectToRoute('jtc_annonce_show', array('id' => $annonce->getId()))
+                    )
+            );
+            $formHandler = $this->get('jtc_annonce.annonce_service');
+            $uRepository = $em->getRepository('JtcUserBundle:User');
+            $email = $uRepository->find($annonce->getUtilisateur())->getEmail();
+            $sujet = $formHandler->truncate($annonce->getDescription(), 20, '...', true);
+            $message->setSubject("Nouveau message sur votre annonce : " . $sujet)
+                    ->setFrom($data['email'])
+                    ->setTo($email)
+                    ->setContentType('text/html')
+                    ->setBody($mailContent);
 
-                // On redirige vers la page de visualisation de l'article nouvellement créé
-                $this->get('session')->getFlashBag()->add('info', 'Message bien envoyé');
-                return $this->render('JtcAnnonceBundle:Default:show.html.twig', array(
-                            'annonce' => $annonce,
-                            'transports' => $this->transports,
-                            'colis' => $this->colis,
-                        ));
-            }
+            $mailer->send($message);
+
+            // On redirige vers la page de visualisation de l'article nouvellement créé
+            $this->get('session')->getFlashBag()->add('info', 'Message bien envoyé');
+            return $this->render('JtcAnnonceBundle:Default:show.html.twig', array(
+                        'annonce' => $annonce,
+                        'transports' => $this->transports,
+                        'colis' => $this->colis,
+                    ));
         }
         // On passe la méthode createView() du formulaire à la vue afin qu'elle puisse afficher le formulaire toute seule
         return $this->render('JtcAnnonceBundle:Default:contact.html.twig', array(
@@ -370,4 +358,5 @@ class DefaultController extends BaseController
                     'annonce' => $annonce
                 ));
     }
+
 }

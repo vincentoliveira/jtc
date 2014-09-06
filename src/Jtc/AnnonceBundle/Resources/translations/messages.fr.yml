@@ -37,6 +37,7 @@ jtc:
     voyage: "Voyage :"
     information_voyage: "Information sur le voyage"
     information_colis: "Information sur le colis"
+    nb_contact: "Nombre de message reçu(s)  :"
     info_complementaires: "Information complémentaires"
     poids:
           voyageur : "Poids disponible :"
