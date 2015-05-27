@@ -10,4 +10,11 @@
 /bin/
 /composer.phar
 *~
+
+# IDE
 .DS_Store
+.idea
+
+# VM
+.vagrant
+index.html
