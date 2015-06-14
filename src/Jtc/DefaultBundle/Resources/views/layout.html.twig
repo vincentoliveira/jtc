@@ -45,7 +45,6 @@
                 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
                 <script src="{{ asset('js/main.js') }}"></script>
 
-        {{ facebook_initialize({'xfbml': true, 'culture': 'fr_FR', 'fbAsyncInit': 'onFbInit();'}) }}
                 <script type="text/javascript" > // Script for FOSFacebookBundle
                 function goLogIn(){
                     window.location.href = "{{ path('_security_check') }}";

@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         {% if error %}
-            <div class="form-error">{{ error|trans }}</div>
+            <div class="form-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         <form action="{{ path("fos_user_security_check") }}" method="post">

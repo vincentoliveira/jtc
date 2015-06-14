@@ -2,9 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     
-parameters:
-    fos_facebook.channel.expire: 31536000 #60*60*24*365
-    
+parameters: 
     annonce.type:
         voyageur: 0
         expediteur: 1
@@ -127,11 +125,3 @@ fos_user:
     from_email:
         address:        webmaster@zecolis.com
         sender_name:    zecolis
-
-# app/config/config.yml
-fos_facebook:
-    alias:  facebook
-    app_id: %api_facebook_id%
-    secret: %api_facebook_secret%
-    cookie: true
-    permissions: [email, user_birthday, user_location, read_friendlists]
